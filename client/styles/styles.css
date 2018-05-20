@@ -1,0 +1,19 @@
+
+.OFModular
+{
+    background-color: #f3f3f4;
+}
+
+.PlayerScroll
+{
+    height: 750px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.TeamScroll
+{
+    height: 730px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

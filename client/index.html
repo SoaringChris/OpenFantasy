@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang = "en-US">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel = "stylesheet" href = "styles/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <script src = "scripts/init.js"></script>
+        <script src = "scripts/League.js"></script>
+        <script src = "scripts/Team.js"></script>
+        <script src = "scripts/Player.js"></script>
+        <script src = "scripts/Rule.js"></script>
+        <head>
+            <title>OpenFantasy</title>
+            <style>
+            </style>
+        </head>
+    <body ng-app = "myApp">
+        <nav class = "navbar navbar-default">
+            <div class = "container-fluid">
+                <div class = "navbar-header">
+                    <a class = "navbar-brand" href = "#!">OpenFantasy</a>
+                </div>
+                <ul class = "nav navbar-nav">
+                    <li><a href = "#!dashboard">Dashboard</a></li>
+                    <li><a href = "#!teams">Teams</a></li>
+                    <li><a href = "#!players">Players</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class = "contentZone"></div>
+        <div ng-view></div>
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function($routeProvider){
+            $routeProvider
+                .when("/", {templateUrl: "pages/landing.html"})
+                .when("/create_league", {templateUrl : "pages/create_league.html"})
+                .when("/teams", {templateUrl: "pages/teams.html"})
+                .when("/players", {templateUrl: "pages/players.html"})
+                .when("/dashboard", {templateUrl: "pages/dashboard.html"});
+
+        })
+    </script>
+    </body>
+</html>
