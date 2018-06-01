@@ -6,26 +6,23 @@
 </head>
 <body>
     <div class = "row">
-        <button class = "btn btn-success col-sm-2 col-sm-offset-5" data-toggle="modal" data-target="#newTeamModal">Add New Player&nbsp&nbsp<span class ="glyphicon glyphicon-plus"></span></button>
+        <button class = "btn btn-success col-sm-2 col-sm-offset-5" data-toggle="modal" data-target="#newRuleModal">Add New Rule&nbsp&nbsp<span class ="glyphicon glyphicon-plus"></span></button>
     </div>
     <br><br><br>
-    <div class="list-group TeamScroll">
-        <button type = button class = "list-group-item list-group-item-action" data-toggle="modal" data-target="#teamViewModal">Team 1</button>
+    <div class="list-group RuleScroll">
+        <button type = button class = "list-group-item list-group-item-action" data-toggle = "modal" data-target = "#ruleViewModal">Rule 1</button>
     </div>
 
-    <div id = "teamViewModal" class = "modal fade" role = "dialog">
+    <div id = "ruleViewModal" class = "modal fade" role = "dialog">
         <div class = "modal-dialog">
             <div class = "modal-content">
                 <div class = "modal-header">
                     <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
-                    <h2 class= "modal-title">Team Name</h2>
+                    <h2 class= "modal-title">Rule Name</h2>
                 </div>
                 <div class = "modal-body">
-                    <b>Name:</b> Team Name
-                    <br>
-                    <b>Owner:</b> Owner Name
-                    <br>
-                    <b>Score:</b> 1000
+                    <p>Rule description goes here</p>
+                    <b>Value:</b> 100
                 </div>
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-info btn-md">Edit</button>
@@ -35,27 +32,26 @@
         </div>
     </div>
 
-    <div id = "newTeamModal" class = "modal fade" role = "dialog">
+    <div id = "newRuleModal" class = "modal fade" role = "dialog">
         <div class = "modal-dialog">
             <div class = "modal-content">
                 <div class = "modal-header">
                     <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
-                    <h2 class= "modal-title">New Team</h2>
+                    <h2 class= "modal-title">New Rule</h2>
                 </div>
                 <div class = "modal-body">
                     <div class = "form-group">
-                        <lable for = "plName">Team Name</lable>
-                        <input type = "text" class = "form-control" id = "tmName">
+                        <lable for = "rlName">Rule Name</lable>
+                        <input type = "text" class = "form-control" id = "rlName">
                     </div>
-                    <div class="form-group">
-                        <lable for = "owName">Team Owner</lable>
-                        <input type = "text" class = "form-control" id = "owName">
+                    <div class = "form-group">
+                        <lable for = "rlVal">Value</lable>
+                        <input type = "number" class = "form-control" id = "rlVal">
                     </div>
-                    <div class="form-group">
-                        <lable for = "tmScore">Starting Score</lable>
-                        <input type = "number" class = "form-control" id = "tmScore">
+                    <div class = "form-group">
+                        <lable for = "rlDisc">Description</lable>
+                        <textarea class = "form-control" rows = 6 id = "rlDisc"></textarea>
                     </div>
-
                 </div>
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-success btn-md">Save</button>

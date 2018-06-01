@@ -17,3 +17,10 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.RuleScroll
+{
+    height: 730px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
