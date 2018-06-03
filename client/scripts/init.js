@@ -1,5 +1,9 @@
 var global =
     {
         leagues:[],
-        activeLeague:null
+        activeLeague:null,
+        players:[],
+        teams:[],
+        rules:[]
     };
+
