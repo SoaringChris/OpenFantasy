@@ -6,11 +6,11 @@
 </head>
 <body>
     <div class = "row">
-        <button class = "btn btn-success col-sm-2 col-sm-offset-5" data-toggle="modal" data-target="#newTeamModal">Add New Player&nbsp&nbsp<span class ="glyphicon glyphicon-plus"></span></button>
+        <button class = "btn btn-success col-sm-2 col-sm-offset-5" data-toggle="modal" data-target="#newTeamModal">Add New Team&nbsp&nbsp<span class ="glyphicon glyphicon-plus"></span></button>
     </div>
     <br><br><br>
-    <div class="list-group TeamScroll">
-        <button type = button class = "list-group-item list-group-item-action" data-toggle="modal" data-target="#teamViewModal">Team 1</button>
+    <div class="list-group TeamScroll" id = "TeamScroll">
+
     </div>
 
     <div id = "teamViewModal" class = "modal fade" role = "dialog">
@@ -29,11 +29,11 @@
                 </div>
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-info btn-md">Edit</button>
-                    <button type = "button" class = "btn btn-danger btn-md">Delete</button>
+                    <button type = "button" class = "btn btn-danger btn-md" onclick="removeTeam($('#teamViewModal').attr('data-tNo'))">Delete</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div><script>populateTeamList()</script>
 
     <div id = "newTeamModal" class = "modal fade" role = "dialog">
         <div class = "modal-dialog">
@@ -44,7 +44,7 @@
                 </div>
                 <div class = "modal-body">
                     <div class = "form-group">
-                        <lable for = "plName">Team Name</lable>
+                        <lable for = "tmName">Team Name</lable>
                         <input type = "text" class = "form-control" id = "tmName">
                     </div>
                     <div class="form-group">
@@ -58,7 +58,7 @@
 
                 </div>
                 <div class = "modal-footer">
-                    <button type = "button" class = "btn btn-success btn-md">Save</button>
+                    <button type = "button" class = "btn btn-success btn-md" onclick="newTeam()">Save</button>
                     <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

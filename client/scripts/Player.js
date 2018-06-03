@@ -29,7 +29,6 @@ Player = function(name, img)
 
 populatePlayerList = function()
 {
-    console.log("test");
     var scroll = document.getElementById("PlayerScroll");
     var players = global.players;
     var playerNum = players.length;
@@ -39,7 +38,6 @@ populatePlayerList = function()
     for(i = 0; i < playerRows; i++)
     {
         html += "<div class = \"row\">\n"
-        console.log(playerNum);
         html+="<button class =\"btn btn-info col-sm-2 col-sm-offset-2\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
             " onclick=\"getPlayer(this.getAttribute('data-playNo'))\">\n" +
             players[playerNum-1].name +
@@ -76,9 +74,16 @@ getPlayer = function(pNo)
 {
     console.log(pNo);
     var player = global.players[pNo];
-    var modal = $("#playerViewModal");
+    $("#playerViewModal").attr("data-pNo", pNo);
     $("#PlayerTitle").html(player.name);
     $("#PlayerName").html(player.name);
     $("#PlayerOwner").html(player.owner);
     $("#PlayerScore").html(player.points);
+}
+
+removePlayer = function(pNo)
+{
+    global.players.splice(pNo,1);
+    $("#playerViewModal").modal('hide');
+    populatePlayerList();
 }
