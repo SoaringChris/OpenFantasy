@@ -25,6 +25,7 @@
                     <b>Value:</b> <div id="RuleVal">100</div>
                 </div>
                 <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-success btn-md" onclick = "enactPrep($('#ruleViewModal').attr('data-rNo'))">Enact</button>
                     <button type = "button" class = "btn btn-info btn-md">Edit</button>
                     <button type = "button" class = "btn btn-danger btn-md" onclick="removeRule($('#ruleViewModal').attr('data-rNo'))">Delete</button>
                 </div>
@@ -55,6 +56,29 @@
                 </div>
                 <div class = "modal-footer">
                     <button type = "button" class = "btn btn-success btn-md" onclick="newRule()">Save</button>
+                    <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id = "enactRuleModal" class = "modal fade" rolate = "dialog">
+        <div class = "modal-dialog">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                    <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
+                    <h2 class = 'modal-title'>Enact Rule</h2>
+                </div>
+                <div class = 'modal-body' id = 'enact-body'>
+                    <div class = form-group>
+                        <lable for = targetPl>Select the player you wish to apply the rule to:</lable>
+                        <select class = 'form-control' id = 'targetPl'>
+
+                        </select>
+                    </div>
+                </div>
+                <div class = 'modal-footer'>
+                    <button type = "button" class = "btn btn-success btn-md" onclick="global.rules[$('#enactRuleModal').attr('data-rNo')].enact(global.players[$('#targetPl').val()])">Save</button>
                     <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

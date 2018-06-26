@@ -11,6 +11,7 @@ Team = function(name, oName, points)
         self.addPlayer = function(player)
         {
             self.players.push(player);
+            save();
         };
 
         self.removePlayer = function(player)
@@ -18,7 +19,11 @@ Team = function(name, oName, points)
             for(i in self.players)
             {
                 if(self.players[i] === player)
-                    self.players.splice(i, 0)
+                {
+                    self.players.splice(i, 0);
+                    self.players[i].owner = "Unsigned";
+                    save();
+                }
             }
         };
 
@@ -46,6 +51,7 @@ newTeam = function()
     var oName = $("#owName").val();
     var score = $("#tmScore").val();
     global.teams.push(Team(tName, oName, score));
+    save();
     $("#newTeamModal").modal('hide');
     populateTeamList();
     $('#tmName').val("");
@@ -61,11 +67,58 @@ getTeam = function(tNo)
     $("#TeamName").html(teams[tNo].name);
     $("#TeamOwner").html(teams[tNo].oName);
     $("#TeamScore").html(teams[tNo].points)
-}
+};
 
 removeTeam = function (tNo)
 {
     global.teams.splice(tNo,1);
     $("#teamViewModal").modal('hide');
+    save();
     populateTeamList()
-}
+};
+
+buildTeam = function(name, oName, players, points, playerListOld, playerListNew)
+{
+
+    var playerListFinal = [];
+    for(i in players)
+    {
+        for(j in playerListOld)
+        {
+            if(players[i] === playerListOld[j])
+            {
+                playerListFinal.push(playerListNew[j]);
+                break;
+            }
+        }
+    }
+
+    var self =
+        {
+            name:name,
+            oName:oName,
+            players:playerListFinal,
+            points:points
+        };
+
+    self.addPlayer = function(player)
+    {
+        self.players.push(player);
+        save();
+    };
+
+    self.removePlayer = function(player)
+    {
+        for(i in self.players)
+        {
+            if(self.players[i] === player)
+            {
+                self.players.splice(i, 0);
+                self.players[i].owner = "Unsigned";
+                save();
+            }
+        }
+    };
+
+    return self;
+};
