@@ -4,28 +4,28 @@ Team = function(name, oName, points)
             {
                 name:name,
                 oName:oName,
-                players:[],
+                //players:[],
                 points:points
             };
 
-        self.addPlayer = function(player)
-        {
-            self.players.push(player);
-            save();
-        };
-
-        self.removePlayer = function(player)
-        {
-            for(i in self.players)
-            {
-                if(self.players[i] === player)
-                {
-                    self.players.splice(i, 0);
-                    self.players[i].owner = "Unsigned";
-                    save();
-                }
-            }
-        };
+        // self.addPlayer = function(player)
+        // {
+        //     self.players.push(player);
+        //     save();
+        // };
+        //
+        // self.removePlayer = function(player)
+        // {
+        //     for(i in self.players)
+        //     {
+        //         if(self.players[i] === player)
+        //         {
+        //             self.players.splice(i, 0);
+        //             self.players[i].owner = "Unsigned";
+        //             save();
+        //         }
+        //     }
+        // };
 
         return self;
     };
@@ -49,13 +49,15 @@ newTeam = function()
 {
     var tName = $("#tmName").val();
     var oName = $("#owName").val();
-    var score = $("#tmScore").val();
-    global.teams.push(Team(tName, oName, score));
+    var points = $("#tmpoints").val();
+    if(points == undefined || points == null || points == "")
+        points = 0;
+    global.teams.push(Team(tName, oName, points));
     save();
     $("#newTeamModal").modal('hide');
     populateTeamList();
     $('#tmName').val("");
-    $('#tmScore').val('');
+    $('#tmpoints').val('');
     $('#owName').val("");
 };
 
@@ -80,45 +82,48 @@ removeTeam = function (tNo)
 buildTeam = function(name, oName, players, points, playerListOld, playerListNew)
 {
 
-    var playerListFinal = [];
-    for(i in players)
-    {
-        for(j in playerListOld)
-        {
-            if(players[i] === playerListOld[j])
-            {
-                playerListFinal.push(playerListNew[j]);
-                break;
-            }
-        }
-    }
+    // var playerListFinal = [];
+    // for(i in players)
+    // {
+    //     for(j in playerListOld)
+    //     {
+    //         if(players[i] === playerListOld[j])
+    //         {
+    //             playerListFinal.push(playerListNew[j]);
+    //             break;
+    //         }
+    //     }
+    // }
+    console.log(points);
+    if(points == undefined || points == null || points == "")
+        points = 0;
 
     var self =
         {
             name:name,
             oName:oName,
-            players:playerListFinal,
+            //players:playerListFinal,
             points:points
         };
 
-    self.addPlayer = function(player)
-    {
-        self.players.push(player);
-        save();
-    };
-
-    self.removePlayer = function(player)
-    {
-        for(i in self.players)
-        {
-            if(self.players[i] === player)
-            {
-                self.players.splice(i, 0);
-                self.players[i].owner = "Unsigned";
-                save();
-            }
-        }
-    };
+    // self.addPlayer = function(player)
+    // {
+    //     self.players.push(player);
+    //     save();
+    // };
+    //
+    // self.removePlayer = function(player)
+    // {
+    //     for(i in self.players)
+    //     {
+    //         if(self.players[i] === player)
+    //         {
+    //             self.players.splice(i, 0);
+    //             self.players[i].owner = "Unsigned";
+    //             save();
+    //         }
+    //     }
+    // };
 
     return self;
 };

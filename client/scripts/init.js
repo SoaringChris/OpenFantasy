@@ -22,19 +22,20 @@ load = function()
         var parseTeams = [];
         var parseRules = [];
 
-        //Rebuild playerlist
-        for(i in strdPlayers)
-        {
-                var curPlayer = strdPlayers[i];
-                parsePlayers.push(buildPlayer(curPlayer.name, curPlayer.owner, curPlayer.img, curPlayer.points));
-        }
+
 
         //Rebuild teamlist
         for(i in strdTeams)
         {
                 var curTeam = strdTeams[i];
-                parseTeams.push(buildTeam(curTeam.name, curTeam.oName, curTeam.players))
+                parseTeams.push(buildTeam(curTeam.name, curTeam.oName, curTeam.players, curTeam.points))
         }
+        //Rebuild playerlist
+        for(i in strdPlayers)
+        {
+                var curPlayer = strdPlayers[i];
+                parsePlayers.push(buildPlayer(curPlayer.name, curPlayer.owner, curPlayer.img, curPlayer.points, strdTeams, parseTeams));
+         }
 
         for(i in strdRules)
         {

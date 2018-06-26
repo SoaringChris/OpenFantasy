@@ -38,7 +38,7 @@
                 <b>Score:</b> <div id = PlayerScore>100</div>
             </div>
             <div class = "modal-footer">
-                <button type = "button" class = "btn btn-primary btn-md">Trade</button>
+                <button type = "button" class = "btn btn-primary btn-md" onclick="tradePrep($('#playerViewModal').attr('data-pNo'))">Trade</button>
                 <button type = "button" class = "btn btn-info btn-md">Edit</button>
                 <button type = "button" class = "btn btn-danger btn-md" onclick="removePlayer($('#playerViewModal').attr('data-pNo'))">Delete</button>
             </div>
@@ -67,6 +67,30 @@
         </div>
     </div>
 </div>
+
+<div id = "tradePlayerModal" class = "modal fade" rolate = "dialog">
+    <div class = "modal-dialog">
+        <div class = "modal-content">
+            <div class = "modal-header">
+                <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
+                <h2 class = 'modal-title'>Trade</h2>
+            </div>
+            <div class = 'modal-body' id = 'enact-body'>
+                <div class = form-group>
+                    <lable for = targetTm>Select the team you wish to trade this player to:</lable>
+                    <select class = 'form-control' id = 'targetTm'>
+
+                    </select>
+                </div>
+            </div>
+            <div class = 'modal-footer'>
+                <button type = "button" class = "btn btn-success btn-md" onclick="global.players[$('#tradePlayerModal').attr('data-pNo')].trade(global.teams[$('#targetTm').val()])">Save</button>
+                <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <body onload = "populatePlayerList()">
 
 </body>

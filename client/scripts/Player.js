@@ -10,18 +10,19 @@ Player = function(name, img)
 
     self.trade = function(newOwner)
     {
-        if(self.owner != "Unsigned")
-            self.owner.removePlayer(self);
-        newOwner.addPlayer(self);
+        // if(self.owner != "Unsigned")
+        //     self.owner.removePlayer(self);
+        // newOwner.addPlayer(self);
         self.owner = newOwner;
+        $('#tradePlayerModal').modal('hide');
         save();
     };
 
     self.score = function(value)
     {
-        self.points += value;
+        self.points = Number(self.points) + Number(value);
         if(self.owner != "Unsigned")
-            self.owner.points += value;
+            self.owner.points = Number(self.owner.points) + Number(value);
         save()
     };
 
@@ -80,7 +81,10 @@ getPlayer = function(pNo)
     $("#playerViewModal").attr("data-pNo", pNo);
     $("#PlayerTitle").html(player.name);
     $("#PlayerName").html(player.name);
-    $("#PlayerOwner").html(player.owner);
+    if(player.name != "Unsigned")
+        $("#PlayerOwner").html(player.owner.name);
+    else
+        $("#PlayerOwner").html(player.owner);
     $("#PlayerScore").html(player.points);
 };
 
@@ -92,30 +96,60 @@ removePlayer = function(pNo)
     populatePlayerList();
 };
 
-buildPlayer = function(name, owner, img, points) //For rebuilding a player from saved data
+tradePrep = function(pNo)
 {
+    $('#playerViewModal').modal('hide');
+    $('#tradePlayerModal').modal('show');
+    $('#tradePlayerModal').attr('data-pNo', pNo);
+
+    //Add Teams to dropdown
+    var teams = global.teams;
+    var teamNumber = teams.length;
+    var html = "";
+
+    for(i = 0; i < teams.length; i++)
+    {
+        html += "<option value = '" + i +"'>" + teams[i].name + "</option>\n";
+    }
+    $("#targetTm").append(html);
+};
+
+
+buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For rebuilding a player from saved data
+{
+    var trueOwner;
+    for(i in teamListOld)
+    {
+            if(JSON.stringify(owner) === JSON.stringify(teamListOld[i]))
+            {
+                trueOwner = teamListNew[i];
+                break;
+            }
+    }
+
     var self =
         {
             name:name,
-            owner:owner,
+            owner:trueOwner,
             img:img,
             points:points
         };
 
     self.trade = function(newOwner)
     {
-        if(self.owner != "Unsigned")
-            self.owner.removePlayer(self);
-        newOwner.addPlayer(self);
+        // if(self.owner != "Unsigned")
+        //     self.owner.removePlayer(self);
+        // newOwner.addPlayer(self);
         self.owner = newOwner;
+        $('#tradePlayerModal').modal('hide');
         save();
     };
 
     self.score = function(value)
     {
-        self.points += value;
+        self.points = Number(self.points) + Number(value);
         if(self.owner != "Unsigned")
-            self.owner.points += value;
+            self.owner.points = Number(self.owner.points) + Number(value);
         save()
     };
 
