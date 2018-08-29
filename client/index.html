@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang = "en-US">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel = "stylesheet" href = "styles/styles.css">
+        <link rel = "stylesheet" href = "client/styles/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-        <script src = "scripts/init.js"></script>
-        <script src = "scripts/League.js"></script>
-        <script src = "scripts/Team.js"></script>
-        <script src = "scripts/Player.js"></script>
-        <script src = "scripts/Rule.js"></script>
+        <script src = client/scripts/init.js"></script>
+        <script src = "client/scripts/League.js"></script>
+        <script src = "client/scripts/Team.js"></script>
+        <script src = "client/scripts/Player.js"></script>
+        <script src = "client/scripts/Rule.js"></script>
         <script>load()</script>
         <head>
             <title>OpenFantasy</title>
@@ -38,12 +38,12 @@
         var app = angular.module("myApp", ["ngRoute"]);
         app.config(function($routeProvider){
             $routeProvider
-                .when("/", {templateUrl: "pages/landing.html"})
-                .when("/create_league", {templateUrl : "pages/create_league.html"})
-                .when("/teams", {templateUrl: "pages/teams.html"})
-                .when("/players", {templateUrl: "pages/players.html"})
-                .when("/rules", {templateUrl: "pages/rules.html"})
-                .when("/dashboard", {templateUrl: "pages/dashboard.html"});
+                .when("/", {templateUrl: "client/pages/landing.html"})
+                .when("/create_league", {templateUrl : "client/pages/create_league.html"})
+                .when("/teams", {templateUrl: "client/pages/teams.html"})
+                .when("/players", {templateUrl: "client/pages/players.html"})
+                .when("/rules", {templateUrl: "client/pages/rules.html"})
+                .when("/dashboard", {templateUrl: "client/pages/dashboard.html"});
 
         })
     </script>
