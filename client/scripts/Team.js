@@ -71,6 +71,26 @@ getTeam = function(tNo)
     $("#TeamScore").html(teams[tNo].points)
 };
 
+tEditPrep = function(tNo)
+{
+    $("#teamViewModal").modal('hide');
+    $('#editTeamModal').modal('show');
+    $('#editTeamModal').attr('data-tNo', tNo);
+    var team = global.teams[tNo];
+    $("#tmNameEd").val(team.name);
+    $("#owNameEd").val(team.oName);
+    $("#tmScoreEd").val(team.points);
+
+}
+
+editTeamSave = function(tNo)
+{
+    global.teams[tNo]=  Team($("#tmNameEd").val(), $("#owNameEd").val(), $("#tmScoreEd").val());
+    $('#editTeamModal').modal('hide');
+    save();
+    populateTeamList();
+}
+
 removeTeam = function (tNo)
 {
     global.teams.splice(tNo,1);

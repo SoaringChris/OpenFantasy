@@ -53,6 +53,26 @@ getRule = function(rNo)
 
 };
 
+rEditPrep = function(rNo)
+{
+    $("#ruleViewModal").modal('hide');
+    $('#editRuleModal').modal('show');
+    $('#editRuleModal').attr('data-rNo', rNo);
+    var rule = global.rules[rNo];
+    $("#rlNameEd").val(rule.name);
+    $("#rlValEd").val(rule.value);
+    $("#rlDiscEd").val(rule.description);
+
+}
+
+editRuleSave = function(rNo)
+{
+    global.rules[rNo]=  Rule($("#rlNameEd").val(), $("#rlDiscEd").val(), $("#rlValEd").val());
+    $('#editRuleModal').modal('hide');
+    save();
+    populateRuleList();
+}
+
 enactPrep = function(rNo)
 {
     $('#ruleViewModal').modal('hide');
