@@ -88,6 +88,15 @@ getPlayer = function(pNo)
     $("#PlayerScore").html(player.points);
 };
 
+
+editPlayerSave = function(pNo)
+{
+    global.players[pNo].name = $("#plNameEd").val();
+    $('#editPlayerModal').modal('hide');
+    save();
+    populatePlayerList();
+}
+
 removePlayer = function(pNo)
 {
     global.players.splice(pNo,1);
@@ -113,6 +122,16 @@ tradePrep = function(pNo)
     }
     $("#targetTm").append(html);
 };
+
+pEditPrep = function(pNo)
+{
+    $("#playerViewModal").modal('hide');
+    $('#editPlayerModal').modal('show');
+    $('#editPlayerModal').attr('data-pNo', pNo);
+    var player = global.players[pNo];
+    $("#plNameEd").val(player.name);
+
+}
 
 
 buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For rebuilding a player from saved data
