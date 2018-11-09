@@ -15,7 +15,6 @@ Rank = function(category, element, top)
                 "</tr>";
         }
     }
-    console.log(html);
     element.append(html);
 
 }
