@@ -8,10 +8,28 @@
     <div class = "row">
         <div class = "col-sm-4 col-sm-offset-1 well-lg OFModular">
             <h2><b>Standings</b></h2>
+            <table class = "table table-striped" id="teamRank">
+                <tr>
+                    <th scope = "col">Rank</th>
+                    <th scope = "col">Team</th>
+                    <th scope = "col">Score</th>
+                </tr>
+            </table>
         </div>
         <div class = "col-sm-4 col-sm-offset-1 well-lg OFModular">
             <h2><b>Player Rankings</b></h2>
+            <table class = "table table-striped" id="playerRank">
+                <tr>
+                    <th scope = "col">Rank</th>
+                    <th scope = "col">Player</th>
+                    <th scope = "col">Points</th>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
+<script>
+    Rank(global.teams, $("#teamRank"), 5);
+    Rank(global.players, $("#playerRank"), 5);
+</script>
 </html>
