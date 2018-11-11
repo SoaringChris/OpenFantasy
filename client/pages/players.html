@@ -5,18 +5,18 @@
     <title>Title</title>
 </head>
     <div class = "row">
-        <button class = "btn btn-success col-sm-2 col-sm-offset-5" data-toggle="modal" data-target = "#newPlayerModal" onclick="populatePlayerList()">Add New Player&nbsp&nbsp<span class ="glyphicon glyphicon-plus"></span></button>
+        <button class = "btn btn-success col-sm-2 offset-sm-5" data-toggle="modal" data-target = "#newPlayerModal" onclick="populatePlayerList()">Add New Player&nbsp&nbsp<i class = "fas fa-plus"></i> </button>
     </div>
     <br><br><br>
     <div class = "PlayerScroll" id = "PlayerScroll">
         <div class = "row">
-            <button class = "btn btn-info col-sm-2 col-sm-offset-2" data-toggle="modal" data-target= "#playerViewModal">
+            <button class = "btn btn-info col-sm-2 offset-sm-2" data-toggle="modal" data-target= "#playerViewModal">
                 Player 1
             </button>
-            <button class = "btn btn-info col-sm-2 col-sm-offset-1" data-toggle="modal" data-target= "#playerViewModal">
+            <button class = "btn btn-info col-sm-2 offset-sm-1" data-toggle="modal" data-target= "#playerViewModal">
                 Player 2
             </button>
-            <button class = "btn btn-info col-sm-2 col-sm-offset-1" data-toggle="modal" data-target= "#playerViewModal">
+            <button class = "btn btn-info col-sm-2 offset-sm-1" data-toggle="modal" data-target= "#playerViewModal">
                 Player 3
             </button>
         </div>
@@ -27,8 +27,8 @@
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
-                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
                 <h2 class= "modal-title" id = "PlayerTitle">Player Name</h2>
+                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
             </div>
             <div class = "modal-body">
                 <b>Name:</b> <div id = "PlayerName">Player Name</div>
@@ -50,8 +50,8 @@
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
-                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
                 <h2 class= "modal-title">New Player</h2>
+                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
             </div>
             <div class = "modal-body">
                 <div class = "form-group">
@@ -72,8 +72,8 @@
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
-                <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
                 <h2 class = 'modal-title'>Trade</h2>
+                <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
             </div>
             <div class = 'modal-body' id = 'enact-body'>
                 <div class = form-group>
@@ -95,8 +95,8 @@
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
-                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
                 <h2 class= "modal-title">Edit Player</h2>
+                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
             </div>
             <div class = "modal-body">
                 <div class = "form-group">
