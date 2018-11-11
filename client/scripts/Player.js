@@ -41,7 +41,7 @@ populatePlayerList = function()
     for(i = 0; i < playerRows; i++)
     {
         html += "<div class = \"row\">\n";
-        html+="<button class =\"btn btn-info col-sm-2 col-sm-offset-2\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
+        html+="<button class =\"btn btn-info col-sm-2 offset-sm-2\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
             " onclick=\"getPlayer(this.getAttribute('data-playNo'))\">\n" +
             players[playerNum-1].name +
             "</button>";
@@ -50,7 +50,7 @@ populatePlayerList = function()
         for(j = 0; j < 2; j++)
             if(playerNum != 0)
             {
-                html+="<button class =\"btn btn-info col-sm-2 col-sm-offset-1\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
+                html+="<button class =\"btn btn-info col-sm-2 offset-sm-1\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
                     " onclick='getPlayer(this.getAttribute('data-playNo'))'>\n" +
                     players[playerNum-1].name +
                     "</button>";

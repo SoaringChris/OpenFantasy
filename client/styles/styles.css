@@ -24,3 +24,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.navbar
+{
+    margin-bottom: 20px;
+}
