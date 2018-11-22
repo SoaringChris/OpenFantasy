@@ -38,7 +38,7 @@
                 <b>Score:</b> <div id = PlayerScore>100</div>
             </div>
             <div class = "modal-footer">
-                <button type = "button" class = "btn btn-primary btn-md" onclick="tradePrep($('#playerViewModal').attr('data-pNo'))">Trade</button>
+                <button id = "tradebutton" type = "button" class = "btn btn-primary btn-md" onclick="tradePrep($('#playerViewModal').attr('data-pNo'))">Trade</button>
                 <button type = "button" class = "btn btn-info btn-md" onclick = "pEditPrep($('#playerViewModal').attr('data-pNo'))">Edit</button>
                 <button type = "button" class = "btn btn-danger btn-md" onclick="removePlayer($('#playerViewModal').attr('data-pNo'))">Delete</button>
             </div>
@@ -112,8 +112,19 @@
         </div>
     </div>
 </div>
+<div id = "tradeModalContainer">
+
+</div>
 
 <body onload = "populatePlayerList()">
 
 </body>
+<script>
+    function initPlayerTrade(event)
+    {
+        var url = path + "pages/trade.html"
+        $("#tradeModalContainer").load(url);
+        $("#TradeModal").showModal();
+    }
+</script>
 </html>

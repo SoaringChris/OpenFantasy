@@ -1,3 +1,5 @@
+var path = "client/"
+
 var global =
     {
         //leagues:[],

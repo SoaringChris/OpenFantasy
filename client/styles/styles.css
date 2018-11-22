@@ -29,3 +29,55 @@
 {
     margin-bottom: 20px;
 }
+
+.vr
+{
+    border-left: 1px lightgray solid;
+    height: 100%;
+}
+
+.left
+{
+    border-left: 1px lightgray solid;
+}
+
+.right
+{
+    border-right: 1px lightgray solid;
+}
+
+.top
+{
+    border-top: 1px lightgray solid;
+}
+
+.bottom
+{
+    border-bottom: 1px lightgray solid;
+}
+
+.noCorner
+{
+    border-radius: 0px !important;
+}
+
+.teamList{
+    height: 70%;
+    overflow-y: scroll;
+}
+
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+
+.pointblock{
+    height: 48px;
+}
+
+.mt-1-5
+{
+    margin-top: .38rem;
+}
