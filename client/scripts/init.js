@@ -1,4 +1,4 @@
-var path = "client/"
+var path = ""
 
 var global =
     {

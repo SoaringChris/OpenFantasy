@@ -2,18 +2,18 @@
 <html lang = "en-US">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <link rel = "stylesheet" href = "client/styles/styles.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <link rel = "stylesheet" href = "styles/styles.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-        <script src = "client/scripts/init.js"></script>
-        <script src = "client/scripts/League.js"></script>
-        <script src = "client/scripts/Team.js"></script>
-        <script src = "client/scripts/Player.js"></script>
-        <script src = "client/scripts/Rule.js"></script>
-        <script src = "client/scripts/Dashboard.js"></script>
+        <script src = "scripts/init.js"></script>
+        <script src = "scripts/League.js"></script>
+        <script src = "scripts/Team.js"></script>
+        <script src = "scripts/Player.js"></script>
+        <script src = "scripts/Rule.js"></script>
+        <script src = "scripts/Dashboard.js"></script>
         <script>load()</script>
         <head>
             <title>OpenFantasy</title>
@@ -42,12 +42,12 @@
         var app = angular.module("myApp", ["ngRoute"]);
         app.config(function($routeProvider){
             $routeProvider
-                .when("/", {templateUrl: "client/pages/landing.html"})
-                .when("/create_league", {templateUrl : "client/pages/create_league.html"})
-                .when("/teams", {templateUrl: "client/pages/teams.html"})
-                .when("/players", {templateUrl: "client/pages/players.html"})
-                .when("/rules", {templateUrl: "client/pages/rules.html"})
-                .when("/dashboard", {templateUrl: "client/pages/dashboard.html"});
+                .when("/", {templateUrl: "pages/landing.html"})
+                .when("/create_league", {templateUrl : "pages/create_league.html"})
+                .when("/teams", {templateUrl: "pages/teams.html"})
+                .when("/players", {templateUrl: "pages/players.html"})
+                .when("/rules", {templateUrl: "pages/rules.html"})
+                .when("/dashboard", {templateUrl: "pages/dashboard.html"});
 
         })
     </script>

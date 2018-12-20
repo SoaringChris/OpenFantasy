@@ -38,7 +38,7 @@
                 <b>Score:</b> <div id = PlayerScore>100</div>
             </div>
             <div class = "modal-footer">
-                <button id = "tradebutton" type = "button" class = "btn btn-primary btn-md" onclick="tradePrep($('#playerViewModal').attr('data-pNo'))">Trade</button>
+                <button id = "tradebutton" type = "button" class = "btn btn-primary btn-md" onclick = "initPlayerTrade($('#playerViewModal').attr('data-pNo'))">Trade</button>
                 <button type = "button" class = "btn btn-info btn-md" onclick = "pEditPrep($('#playerViewModal').attr('data-pNo'))">Edit</button>
                 <button type = "button" class = "btn btn-danger btn-md" onclick="removePlayer($('#playerViewModal').attr('data-pNo'))">Delete</button>
             </div>
@@ -120,11 +120,19 @@
 
 </body>
 <script>
-    function initPlayerTrade(event)
+    function initPlayerTrade(pNo)
     {
-        var url = path + "pages/trade.html"
-        $("#tradeModalContainer").load(url);
-        $("#TradeModal").showModal();
+        if(global.players[pNo].owner != "Unsigned") {
+            var url = path + "modals/trade.html";
+            $("#playerViewModal").modal('hide');
+            $("#tradeModalContainer").load(url, function () {
+                newTradeFromPlayer(pNo);
+                $('#TradeModal').modal("show");
+            });
+        }
+        else{
+            tradePrep(pNo);
+        }
     }
 </script>
 </html>
