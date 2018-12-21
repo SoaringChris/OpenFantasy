@@ -51,7 +51,7 @@ populatePlayerList = function()
             if(playerNum != 0)
             {
                 html+="<button class =\"btn btn-info col-sm-2 offset-sm-1\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
-                    " onclick='getPlayer(this.getAttribute('data-playNo'))'>\n" +
+                    " onclick=\"getPlayer(this.getAttribute('data-playNo'))\">\n" +
                     players[playerNum-1].name +
                     "</button>";
                 playerNum--;
@@ -81,7 +81,7 @@ getPlayer = function(pNo)
     $("#playerViewModal").attr("data-pNo", pNo);
     $("#PlayerTitle").html(player.name);
     $("#PlayerName").html(player.name);
-    if(player.name != "Unsigned")
+    if(player.owner != "Unsigned")
         $("#PlayerOwner").html(player.owner.name);
     else
         $("#PlayerOwner").html(player.owner);
@@ -136,7 +136,7 @@ pEditPrep = function(pNo)
 
 buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For rebuilding a player from saved data
 {
-    var trueOwner;
+    var trueOwner = "Unsigned";
     for(i in teamListOld)
     {
             if(JSON.stringify(owner) === JSON.stringify(teamListOld[i]))
