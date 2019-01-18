@@ -123,7 +123,7 @@
     function initPlayerTrade(pNo)
     {
         if(global.players[pNo].owner != "Unsigned") {
-            var url = path + "modals/trade.html";
+            var url = path + "client/modals/trade.html";
             $("#playerViewModal").modal('hide');
             $("#tradeModalContainer").load(url, function () {
                 newTradeFromPlayer(pNo);
