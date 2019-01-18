@@ -8,10 +8,10 @@
             </div>
             <div class = "modal-body pb-0 pt-0">
                 <div class = "row">
-                    <select id="teamSelect1" class = "form-control col">
+                    <select id="teamSelect1" class = "form-control col" onchange="dropdownTeamChange(event, 1)">
                         <option selected id = "teamSelect1-Generic">Select the First Team...</option>
                     </select>
-                    <select id = "teamSelect2" class = "form-control col">
+                    <select id = "teamSelect2" class = "form-control col" onchange = "dropdownTeamChange(event, 2)">
                         <option selected id = "teamSelect2-Generic">Select the Second Team...</option>
                     </select>
                 </div>
@@ -62,7 +62,9 @@
                 </div>
             </div>
             <div class = "modal-footer">
-                <button class = "btn btn-success btn-md">Complete Trade</button>
+                <button class = "btn btn-success btn-md" onclick="global.activeTrade.complete()">Complete Trade</button>
+                <button class = "btn btn-danger btn-md" data-dismiss="modal">Cancel Trade</button>
+
             </div>
         </div>
     </div>
@@ -79,13 +81,31 @@
     // }
 
     function offerPoints(event, num){
-        console.log(event.target.value);
-
-        if(!(event.target.value <= 0))
+        var trade = global.activeTrade;
+        var selectCheck;
+        if(num === 1)
         {
-        var html = '<div class = "pointblock pt-3 mb-1 col"><p class = "mx-0 my-0 alignright">Points: ' + event.target.value + '</p></div>';
+            selectCheck = $("#pointSelect1")
+        }
+        else
+        {
+            selectCheck = $("#pointSelect2")
+        }
+        if(!(parseInt(event.target.value) <= 0 || parseInt(event.target.value) > selectCheck.attr("max")) && Number.isInteger(parseInt(event.target.value)))
+        {
+        var html = '<div class = "pointblock pt-3 mb-1 col"><p class = "mx-0 my-0 alignright">Points: ' + parseInt(event.target.value) + '</p></div>';
 
             $('#pointOffer'+num).html(html);
+
+            if(num === 1)
+            {
+                trade.oPoints1 = event.target.value;
+            }
+            else
+            {
+                trade.oPoints2 = event.target.value;
+            }
+
         }
         else
         {
@@ -94,18 +114,52 @@
     }
 
     function offerPlayer(event, team){
-        var pNo = event.target.getAttribute('data-playNo');
-        event.target.remove();
+        var trade = global.activeTrade;
+        var pNo = event.currentTarget.getAttribute('data-playNo');
+        if(team == 1)
+        {
+            trade.players1.push(global.players[pNo]);
+        }
+        if(team == 2)
+        {
+            trade.players2.push(global.players[pNo])
+        }
+
+        trade.display();
     }
 
     function undoPlayerOffer(event, team)
     {
-        var pNo = event.target.getAttribute('data-playNo')
-        event.target.remove();
+        var pNo = event.currentTarget.getAttribute('data-playNo');
+        var trade = global.activeTrade;
+        if(team == 1)
+        {
+            trade.players1.splice(trade.players1.indexOf(global.players[pNo]), 1);
+        }
+        if(team == 2)
+        {
+            trade.players2.splice(trade.players2.indexOf(global.players[pNo]), 2);
+        }
+        trade.display();
     }
 
+    function dropdownTeamChange(event, team)
+    {
+        var trade = global.activeTrade;
+        if(team == 1)
+        {
+            trade.team1 = global.teams[$("#teamSelect1 option:selected").attr("data-teamNo")];
+            trade.players1 = [];
+        }
 
+        if(team == 2)
+        {
+            trade.team2 = global.teams[$("#teamSelect2 option:selected").attr("data-teamNo")];
+            trade.players2 = [];
+        }
 
+        trade.display();
+    }
 
     $('#TradeModal').on('hidden.bs.modal', function () {
         $('#TradeModal').parent().html("")

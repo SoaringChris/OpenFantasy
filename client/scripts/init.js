@@ -6,7 +6,9 @@ var global =
         //activeLeague:null,
         players:[],
         teams:[],
-        rules:[]
+        rules:[],
+        trades:[],
+        activeTrade: null
     };
 
 save = function()

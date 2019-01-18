@@ -120,7 +120,7 @@ tradePrep = function(pNo)
     {
         html += "<option value = '" + i +"'>" + teams[i].name + "</option>\n";
     }
-    $("#targetTm").append(html);
+    $("#targetTm").html(html);
 };
 
 pEditPrep = function(pNo)

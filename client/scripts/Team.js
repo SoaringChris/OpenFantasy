@@ -27,6 +27,17 @@ Team = function(name, oName, points)
         //     }
         // };
 
+        self.players = function () {
+            array = []
+            for(i in global.players)
+            {
+                if(global.players[i].owner == self) {
+                    array.push(global.players[i])
+                }
+            }
+            return array
+        }
+
         return self;
     };
 
@@ -144,6 +155,17 @@ buildTeam = function(name, oName, players, points, playerListOld, playerListNew)
     //         }
     //     }
     // };
+
+    self.players = function () {
+        array = []
+        for(i in global.players)
+        {
+            if(global.players[i].owner == self) {
+                array.push(global.players[i])
+            }
+        }
+        return array
+    }
 
     return self;
 };
