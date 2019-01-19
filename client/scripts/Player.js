@@ -8,13 +8,13 @@ Player = function(name, img)
             points:0
         };
 
-    self.trade = function(newOwner)
+    self.pickup = function(newOwner)
     {
         // if(self.owner != "Unsigned")
         //     self.owner.removePlayer(self);
         // newOwner.addPlayer(self);
         self.owner = newOwner;
-        $('#tradePlayerModal').modal('hide');
+        $('#pickupPlayerModal').modal('hide');
         save();
     };
 
@@ -24,6 +24,11 @@ Player = function(name, img)
         if(self.owner != "Unsigned")
             self.owner.points = Number(self.owner.points) + Number(value);
         save()
+    };
+
+    self.drop = function()
+    {
+        self.owner = "Unsigned";
     };
 
     return self;
@@ -81,10 +86,18 @@ getPlayer = function(pNo)
     $("#playerViewModal").attr("data-pNo", pNo);
     $("#PlayerTitle").html(player.name);
     $("#PlayerName").html(player.name);
-    if(player.owner != "Unsigned")
+    if(player.owner != "Unsigned") {
         $("#PlayerOwner").html(player.owner.name);
-    else
+        $("#tradebutton").show();
+        $("#dropbutton").show();
+        $("#pickupbutton").hide();
+    }
+    else {
         $("#PlayerOwner").html(player.owner);
+        $("#tradebutton").hide();
+        $("#dropbutton").hide();
+        $("#pickupbutton").show();
+    }
     $("#PlayerScore").html(player.points);
 };
 
@@ -105,11 +118,11 @@ removePlayer = function(pNo)
     populatePlayerList();
 };
 
-tradePrep = function(pNo)
+pickupPrep = function(pNo)
 {
     $('#playerViewModal').modal('hide');
-    $('#tradePlayerModal').modal('show');
-    $('#tradePlayerModal').attr('data-pNo', pNo);
+    $('#pickupPlayerModal').modal('show');
+    $('#pickupPlayerModal').attr('data-pNo', pNo);
 
     //Add Teams to dropdown
     var teams = global.teams;
@@ -131,7 +144,8 @@ pEditPrep = function(pNo)
     var player = global.players[pNo];
     $("#plNameEd").val(player.name);
 
-}
+};
+
 
 
 buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For rebuilding a player from saved data
@@ -154,13 +168,13 @@ buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For
             points:points
         };
 
-    self.trade = function(newOwner)
+    self.pickup = function(newOwner)
     {
         // if(self.owner != "Unsigned")
         //     self.owner.removePlayer(self);
         // newOwner.addPlayer(self);
         self.owner = newOwner;
-        $('#tradePlayerModal').modal('hide');
+        $('#pickupPlayerModal').modal('hide');
         save();
     };
 
@@ -170,6 +184,11 @@ buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For
         if(self.owner != "Unsigned")
             self.owner.points = Number(self.owner.points) + Number(value);
         save()
+    };
+
+    self.drop = function()
+    {
+        self.owner = "Unsigned";
     };
 
     return self;
