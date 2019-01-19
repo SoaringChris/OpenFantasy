@@ -93,22 +93,21 @@
     </div>
 
     <div id = "enactRuleModal" class = "modal fade" rolate = "dialog">
-        <div class = "modal-dialog">
+        <div class = "modal-dialog modal-lg">
             <div class = "modal-content">
                 <div class = "modal-header">
                     <h2 class = 'modal-title'>Enact Rule</h2>
                     <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
                 </div>
                 <div class = 'modal-body' id = 'enact-body'>
-                    <div class = form-group>
-                        <lable for = targetPl>Select the player you wish to apply the rule to:</lable>
-                        <select class = 'form-control' id = 'targetPl'>
-
-                        </select>
+                    <lable for = targetPl>Select the players you wish to apply the rule to:</lable>
+                    <div class = 'enactlist'>
+                    <ul class = 'list-group' id = 'targetPl'>
+                    </ul>
                     </div>
                 </div>
                 <div class = 'modal-footer'>
-                    <button type = "button" class = "btn btn-success btn-md" onclick="global.rules[$('#enactRuleModal').attr('data-rNo')].enact(global.players[$('#targetPl').val()])">Save</button>
+                    <button type = "button" class = "btn btn-success btn-md" onclick="enactOnSelected($('#enactRuleModal').attr('data-rNo'))">Save</button>
                     <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

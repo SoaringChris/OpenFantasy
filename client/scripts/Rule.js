@@ -63,7 +63,7 @@ rEditPrep = function(rNo)
     $("#rlValEd").val(rule.value);
     $("#rlDiscEd").val(rule.description);
 
-}
+};
 
 editRuleSave = function(rNo)
 {
@@ -71,7 +71,9 @@ editRuleSave = function(rNo)
     $('#editRuleModal').modal('hide');
     save();
     populateRuleList();
-}
+};
+
+var enactSelected = [];
 
 enactPrep = function(rNo)
 {
@@ -86,9 +88,32 @@ enactPrep = function(rNo)
 
     for(i = 0; i < players.length; i++)
     {
-        html += "<option value = '" + i +"'>" + players[i].name + "</option>\n";
+        html += "<div class = 'btn-group-toggle '  onclick='enactSelect(" + i + ")' data-toggle ='buttons'>";
+        html += "<label class = 'btn btn-outline-success list-group-item list-group-item-action noCorner'>"
+        html += "<input type = 'checkbox' checked autocomplete='off' value = '" + i +"'/>" + players[i].name + "</label>";
+        html += "</div>"
     }
     $("#targetPl").append(html);
+};
+
+enactSelect = function(pNo)
+{
+    if(!enactSelected.includes(pNo))
+    {
+        enactSelected.push(pNo);
+    }
+    else
+    {
+        enactSelected.splice(enactSelected.indexOf(pNo), 1)
+    }
+};
+
+enactOnSelected = function(rNo)
+{
+  enactSelected.forEach(function(pNo)
+  {
+   global.rules[rNo].enact(global.players[pNo])
+  });
 };
 
 removeRule = function(rNo)
