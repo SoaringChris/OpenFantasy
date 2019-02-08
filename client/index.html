@@ -14,6 +14,7 @@
         <script src = "client/scripts/Player.js"></script>
         <script src = "client/scripts/Rule.js"></script>
         <script src = "client/scripts/Dashboard.js"></script>
+        <script src = "client/scripts/Events.js"/>
         <script>load()</script>
         <head>
             <title>OpenFantasy</title>
@@ -29,6 +30,7 @@
             <div class = "collapse navbar-collapse" id = "navbarNav">
                 <ul class = "navbar-nav">
                     <li class = "nav-item"><a class="nav-link" href = "#!dashboard">Dashboard</a></li>
+                    <li class = "nav-item"><a class = "nav-link" href = "#!events">Events</a></li>
                     <li class = "nav-item"><a class = "nav-link" href = "#!teams">Teams</a></li>
                     <li class = "nav-item"><a class = "nav-link" href = "#!players">Players</a></li>
                     <li class = "nav-item"><a class = "nav-link" href = "#!rules">Rules</a></li>
@@ -39,11 +41,12 @@
         <div ng-view></div>
 
     <script>
-        var app = angular.module("myApp", ["ngRoute"]);
+        let app = angular.module("myApp", ["ngRoute"]);
         app.config(function($routeProvider){
             $routeProvider
                 .when("/", {templateUrl: "client/pages/landing.html"})
                 .when("/create_league", {templateUrl : "client/pages/create_league.html"})
+                .when("/events", {templateUrl: "client/pages/events.html"})
                 .when("/teams", {templateUrl: "client/pages/teams.html"})
                 .when("/players", {templateUrl: "client/pages/players.html"})
                 .when("/rules", {templateUrl: "client/pages/rules.html"})

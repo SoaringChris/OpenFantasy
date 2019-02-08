@@ -81,8 +81,8 @@
     // }
 
     function offerPoints(event, num){
-        var trade = global.activeTrade;
-        var selectCheck;
+        let trade = global.activeTrade;
+        let selectCheck;
         if(num === 1)
         {
             selectCheck = $("#pointSelect1")
@@ -93,7 +93,7 @@
         }
         if(!(parseInt(event.target.value) <= 0 || parseInt(event.target.value) > selectCheck.attr("max")) && Number.isInteger(parseInt(event.target.value)))
         {
-        var html = '<div class = "pointblock pt-3 mb-1 col"><p class = "mx-0 my-0 alignright">Points: ' + parseInt(event.target.value) + '</p></div>';
+        let html = '<div class = "pointblock pt-3 mb-1 col"><p class = "mx-0 my-0 alignright">Points: ' + parseInt(event.target.value) + '</p></div>';
 
             $('#pointOffer'+num).html(html);
 
@@ -114,8 +114,8 @@
     }
 
     function offerPlayer(event, team){
-        var trade = global.activeTrade;
-        var pNo = event.currentTarget.getAttribute('data-playNo');
+        let trade = global.activeTrade;
+        let pNo = event.currentTarget.getAttribute('data-playNo');
         if(team == 1)
         {
             trade.players1.push(global.players[pNo]);
@@ -130,8 +130,8 @@
 
     function undoPlayerOffer(event, team)
     {
-        var pNo = event.currentTarget.getAttribute('data-playNo');
-        var trade = global.activeTrade;
+        let pNo = event.currentTarget.getAttribute('data-playNo');
+        let trade = global.activeTrade;
         if(team == 1)
         {
             trade.players1.splice(trade.players1.indexOf(global.players[pNo]), 1);
@@ -145,7 +145,7 @@
 
     function dropdownTeamChange(event, team)
     {
-        var trade = global.activeTrade;
+        let trade = global.activeTrade;
         if(team == 1)
         {
             trade.team1 = global.teams[$("#teamSelect1 option:selected").attr("data-teamNo")];

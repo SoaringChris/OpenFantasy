@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        $("#EventsTableView").toggle(false);
+        $("#EventsTimeline").toggle(false);
+    </script>
+</head>
+<body onload='populateEventList()'>
+    <div id = 'EventsHome'>
+        <button class = 'btn btn-success col-sm-2 offset-sm-5' data-toggle='modal' data-target='#NewEventModal'>Add New Event&nbsp&nbsp<i class = "fas fa-plus"></i></button>
+        <br/><br/><br/>
+        <div class = 'eventScroll' id = 'eventScroll'>
+        </div>
+    </div>
+    
+    
+    
+    <div  id = 'EventsTimeline'>
+    </div>
+    
+    
+    
+    <div id = 'EventsTableView'>
+        <button class = 'btn btn-success col-sm-2 offset-sm-5' data-toggle='modal' data-target='#eventEnactRuleModal' onclick = 'EventEnactPrep()'>Add New Event Item&nbsp&nbsp<i class = "fas fa-plus"></i></button>
+        <br><br><br>
+        <table class = "table table-bordered" id = "EventTable">
+            <thead  id = "EventHeaders">
+                <tr>
+                
+                </tr>
+            </thead>
+            <tbody id="EventBody">
+            
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <div id = "NewEventModal" class = 'modal fade' role = 'dialog'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h2 class='modal-title'>New Event</h2>
+                    <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
+                </div>
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <lable for='newEventName'>Event Name</lable>
+                        <input type='text' class='form-control' id='newEventName'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for = 'newEventDate'>Date</label>
+                        <input type='date' class='form-control' id = 'newEventDate'/>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button type = 'button' class = 'btn btn-success btn-md' data-dismiss='modal' onclick='newEvent($("#newEventName").val(), $("#newEventDate").val())'>Save</button>
+                    <button type = 'button' class = 'btn btn-danger btn-md' data-dismiss='modal'>Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <div id = 'EventEditModal' class = 'modal fade' role = 'dialog'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h2 class='modal-title'>Edit Event</h2>
+                    <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
+                </div>
+                <div class='modal-body'>
+            
+                </div>
+                <div class='modal-footer'>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id = "eventEnactRuleModal" class = "modal fade" rolate = "dialog">
+        <div class = "modal-dialog modal-lg">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                    <h2 class = 'modal-title'>Enact Rule</h2>
+                    <button type = 'button' class = 'close' data-dismiss= 'modal'>x</button>
+                </div>
+                <div class = 'modal-body' id = 'enact-body'>
+                    <select class = "form-control" id = "EventEnactRules" onchange='EventEnactRuleChange(event)'>
+                        <option>Select a rule...</option>
+                    </select>
+                    <lable for = EventEnactTargetPl>Select the players you wish to apply the rule to:</lable>
+                    <div class = 'enactlist'>
+                        <ul class = 'list-group' id = 'EventEnactTargetPl'>
+                        </ul>
+                    </div>
+                </div>
+                <div class = 'modal-footer'>
+                    <button type = "button" class = "btn btn-success btn-md" data-dismiss = "modal" onclick="EventEnactOnSelected()">Save</button>
+                    <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    $(document).ready(function(){
+        populateEventList()
+    });
+</script>
+
+</html>

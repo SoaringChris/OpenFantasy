@@ -1,6 +1,6 @@
 League = function(name, discription)
 {
-    var self =
+    let self =
         {
             name:name,
             discription:discription,

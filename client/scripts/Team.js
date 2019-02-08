@@ -1,6 +1,6 @@
 Team = function(name, oName, points)
     {
-        var self =
+        let self =
             {
                 name:name,
                 oName:oName,
@@ -43,9 +43,9 @@ Team = function(name, oName, points)
 
 populateTeamList = function()
 {
-    var teams = global.teams;
-    var teamNumber = teams.length;
-    var html = "";
+    let teams = global.teams;
+    let teamNumber = teams.length;
+    let html = "";
 
     for(i = 0; i < teams.length; i++)
     {
@@ -58,9 +58,9 @@ populateTeamList = function()
 
 newTeam = function()
 {
-    var tName = $("#tmName").val();
-    var oName = $("#owName").val();
-    var points = $("#tmpoints").val();
+    let tName = $("#tmName").val();
+    let oName = $("#owName").val();
+    let points = $("#tmpoints").val();
     if(points == undefined || points == null || points == "")
         points = 0;
     global.teams.push(Team(tName, oName, points));
@@ -74,7 +74,7 @@ newTeam = function()
 
 getTeam = function(tNo)
 {
-    var teams = global.teams;
+    let teams = global.teams;
     $("#teamViewModal").attr("data-tNo", tNo);
     $("#TeamTitle").html(teams[tNo].name);
     $("#TeamName").html(teams[tNo].name);
@@ -87,7 +87,7 @@ tEditPrep = function(tNo)
     $("#teamViewModal").modal('hide');
     $('#editTeamModal').modal('show');
     $('#editTeamModal').attr('data-tNo', tNo);
-    var team = global.teams[tNo];
+    let team = global.teams[tNo];
     $("#tmNameEd").val(team.name);
     $("#owNameEd").val(team.oName);
     $("#tmScoreEd").val(team.points);
@@ -113,7 +113,7 @@ removeTeam = function (tNo)
 buildTeam = function(name, oName, players, points, playerListOld, playerListNew)
 {
 
-    // var playerListFinal = [];
+    // let playerListFinal = [];
     // for(i in players)
     // {
     //     for(j in playerListOld)
@@ -129,13 +129,7 @@ buildTeam = function(name, oName, players, points, playerListOld, playerListNew)
     if(points == undefined || points == null || points == "")
         points = 0;
 
-    var self =
-        {
-            name:name,
-            oName:oName,
-            //players:playerListFinal,
-            points:points
-        };
+    let self = Team(name, oName, points)
 
     // self.addPlayer = function(player)
     // {
@@ -155,17 +149,6 @@ buildTeam = function(name, oName, players, points, playerListOld, playerListNew)
     //         }
     //     }
     // };
-
-    self.players = function () {
-        array = []
-        for(i in global.players)
-        {
-            if(global.players[i].owner == self) {
-                array.push(global.players[i])
-            }
-        }
-        return array
-    }
 
     return self;
 };
