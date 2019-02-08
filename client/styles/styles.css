@@ -6,7 +6,7 @@
 
 .PlayerScroll
 {
-    height: 750px;
+    height: 69.5vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -91,4 +91,12 @@
     max-height: 65vh;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.eventScroll
+{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 69.5vh;
+
 }

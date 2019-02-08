@@ -1,6 +1,6 @@
-var path = ""
+let path = ""
 
-var global =
+let global =
     {
         //leagues:[],
         //activeLeague:null,
@@ -8,7 +8,12 @@ var global =
         teams:[],
         rules:[],
         trades:[],
-        activeTrade: null
+        events:[],
+        activeTrade: null,
+        activePlayer: null,
+        activeRule: null,
+        activeTeam: null,
+        activeEvent: null
     };
 
 save = function()
@@ -18,38 +23,51 @@ save = function()
 
 load = function()
 {
-        var storedLeague = JSON.parse(localStorage.getItem("PreAlphaLeague"));
-        var strdPlayers = storedLeague.players;
-        var strdTeams = storedLeague.teams;
-        var strdRules = storedLeague.rules;
-        var parsePlayers = [];
-        var parseTeams = [];
-        var parseRules = [];
-
+        let storedLeague = JSON.parse(localStorage.getItem("PreAlphaLeague"));
+        let strdPlayers = storedLeague.players;
+        let strdTeams = storedLeague.teams;
+        let strdRules = storedLeague.rules;
+        let strdEvents = storedLeague.events;
+        let parsePlayers = [];
+        let parseTeams = [];
+        let parseRules = [];
+        let parseEvents = [];
 
 
         //Rebuild teamlist
         for(i in strdTeams)
         {
-                var curTeam = strdTeams[i];
+                let curTeam = strdTeams[i];
                 parseTeams.push(buildTeam(curTeam.name, curTeam.oName, curTeam.players, curTeam.points))
         }
         //Rebuild playerlist
         for(i in strdPlayers)
         {
-                var curPlayer = strdPlayers[i];
+                let curPlayer = strdPlayers[i];
                 parsePlayers.push(buildPlayer(curPlayer.name, curPlayer.owner, curPlayer.img, curPlayer.points, strdTeams, parseTeams));
          }
 
         for(i in strdRules)
         {
-                var curRule = strdRules[i];
+                let curRule = strdRules[i];
                 parseRules.push(Rule(curRule.name, curRule.description, curRule.value));
+        }
+        for(i in strdEvents)
+        {
+                let curEvent = strdEvents[i];
+                parseEvents.push(buildEvent(curEvent.title, curEvent.date, curEvent.rules, curEvent.trades, curEvent.drops, curEvent.pickups, strdPlayers, parsePlayers,
+                    strdRules, parseRules))
         }
 
         global.players = parsePlayers;
         global.teams = parseTeams;
         global.rules = parseRules;
+        global.events = parseEvents;
+
+        populatePlayerList();
+        populateEventList();
+        populateRuleList();
+        populateTeamList();
 
 
 };

@@ -70,7 +70,7 @@
     </div>
 </div>
 
-<div id = "pickupPlayerModal" class = "modal fade" rolate = "dialog">
+<div id = "pickupPlayerModal" class = "modal fade" role = "dialog">
     <div class = "modal-dialog">
         <div class = "modal-content">
             <div class = "modal-header">
@@ -125,7 +125,7 @@
     function initPlayerTrade(pNo)
     {
         if(global.players[pNo].owner != "Unsigned") {
-            var url = path + "modals/trade.html";
+            let url = path + "modals/trade.html";
             $("#playerViewModal").modal('hide');
             $("#tradeModalContainer").load(url, function () {
                 newTradeFromPlayer(pNo);

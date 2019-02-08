@@ -2,9 +2,9 @@ Rank = function(category, element, top)
 {
     category.sort(function(x, y){return y.points - x.points});
 
-    var html = "";
+    let html = "";
 
-    for(var i = 0; i < top; i++)
+    for(let i = 0; i < top; i++)
     {
         if(i < category.length) {
             html +=

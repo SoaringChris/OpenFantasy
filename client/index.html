@@ -8,12 +8,14 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
         <script src = "scripts/init.js"></script>
         <script src = "scripts/League.js"></script>
         <script src = "scripts/Team.js"></script>
         <script src = "scripts/Player.js"></script>
         <script src = "scripts/Rule.js"></script>
         <script src = "scripts/Dashboard.js"></script>
+        <script src = "scripts/Events.js"/>
         <script>load()</script>
         <head>
             <title>OpenFantasy</title>
@@ -29,6 +31,7 @@
             <div class = "collapse navbar-collapse" id = "navbarNav">
                 <ul class = "navbar-nav">
                     <li class = "nav-item"><a class="nav-link" href = "#!dashboard">Dashboard</a></li>
+                    <li class = "nav-item"><a class = "nav-link" href = "#!events">Events</a></li>
                     <li class = "nav-item"><a class = "nav-link" href = "#!teams">Teams</a></li>
                     <li class = "nav-item"><a class = "nav-link" href = "#!players">Players</a></li>
                     <li class = "nav-item"><a class = "nav-link" href = "#!rules">Rules</a></li>
@@ -39,11 +42,12 @@
         <div ng-view></div>
 
     <script>
-        var app = angular.module("myApp", ["ngRoute"]);
+        let app = angular.module("myApp", ["ngRoute"]);
         app.config(function($routeProvider){
             $routeProvider
                 .when("/", {templateUrl: "pages/landing.html"})
                 .when("/create_league", {templateUrl : "pages/create_league.html"})
+                .when("/events", {templateUrl: "pages/events.html"})
                 .when("/teams", {templateUrl: "pages/teams.html"})
                 .when("/players", {templateUrl: "pages/players.html"})
                 .when("/rules", {templateUrl: "pages/rules.html"})

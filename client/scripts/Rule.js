@@ -1,6 +1,6 @@
 Rule = function(name, description, value)
 {
-    var self =
+    let self =
         {
             name:name,
             description:description,
@@ -15,11 +15,21 @@ Rule = function(name, description, value)
         return self;
 };
 
+RuleLog = function(rule, players)
+{
+    let self =
+        {
+            rule: rule,
+            players: players
+        };
+    return self;
+};
+
 populateRuleList = function()
 {
-    var rules = global.rules;
-    var ruleNumber = rules.length;
-    var html = "";
+    let rules = global.rules;
+    let ruleNumber = rules.length;
+    let html = "";
 
     for(i = 0; i < rules.length; i++)
     {
@@ -31,9 +41,9 @@ populateRuleList = function()
 
 newRule = function()
 {
-    var name = $("#rlName").val();
-    var disc = $("#rlDisc").val();
-    var value = $("#rlVal").val();
+    let name = $("#rlName").val();
+    let disc = $("#rlDisc").val();
+    let value = $("#rlVal").val();
     global.rules.push(Rule(name, disc, value));
     $("#newRuleModal").modal('hide');
     save();
@@ -45,7 +55,7 @@ newRule = function()
 
 getRule = function(rNo)
 {
-    var rule = global.rules[rNo];
+    let rule = global.rules[rNo];
     $("#ruleViewModal").attr("data-rNo",rNo);
     $("#RuleTitle").html(rule.name);
     $("#RuleDisc").html(rule.description);
@@ -58,7 +68,7 @@ rEditPrep = function(rNo)
     $("#ruleViewModal").modal('hide');
     $('#editRuleModal').modal('show');
     $('#editRuleModal').attr('data-rNo', rNo);
-    var rule = global.rules[rNo];
+    let rule = global.rules[rNo];
     $("#rlNameEd").val(rule.name);
     $("#rlValEd").val(rule.value);
     $("#rlDiscEd").val(rule.description);
@@ -73,23 +83,24 @@ editRuleSave = function(rNo)
     populateRuleList();
 };
 
-var enactSelected = [];
+let enactSelected = [];
 
 enactPrep = function(rNo)
 {
     $('#ruleViewModal').modal('hide');
     $('#enactRuleModal').modal('show');
     $('#enactRuleModal').attr('data-rNo', rNo);
+    enactSelected = [];
 
     //Add players to dropdown
-    var players = global.players;
-    var playerNumber = players.length;
-    var html = "";
+    let players = global.players;
+    let playerNumber = players.length;
+    let html = "";
 
     for(i = 0; i < players.length; i++)
     {
         html += "<div class = 'btn-group-toggle '  onclick='enactSelect(" + i + ")' data-toggle ='buttons'>";
-        html += "<label class = 'btn btn-outline-success list-group-item list-group-item-action noCorner'>"
+        html += "<label class = 'btn btn-outline-success list-group-item list-group-item-action noCorner'>";
         html += "<input type = 'checkbox' checked autocomplete='off' value = '" + i +"'/>" + players[i].name + "</label>";
         html += "</div>"
     }

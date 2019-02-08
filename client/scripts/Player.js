@@ -1,6 +1,6 @@
 Player = function(name, img)
 {
-    var self =
+    let self =
         {
             name:name,
             owner:"Unsigned",
@@ -37,11 +37,11 @@ Player = function(name, img)
 
 populatePlayerList = function()
 {
-    var scroll = document.getElementById("PlayerScroll");
-    var players = global.players;
-    var playerNum = players.length;
-    var playerRows = Math.ceil(playerNum/3);
-    var html ="";
+    let scroll = $("#PlayerScroll");
+    let players = global.players;
+    let playerNum = players.length;
+    let playerRows = Math.ceil(playerNum/3);
+    let html ="";
 
     for(i = 0; i < playerRows; i++)
     {
@@ -64,14 +64,12 @@ populatePlayerList = function()
         html+="</div><br>";
     }
 
-    scroll.innerHTML = html;
+    scroll.html(html);
 
 };
 
 newPlayer = function(name)
 {
-    console.log(name);
-    console.log(global.players);
     global.players.push(Player(name, null));
     $("#newPlayerModal").modal('hide');
     $("#plName").val("");
@@ -82,7 +80,7 @@ newPlayer = function(name)
 getPlayer = function(pNo)
 {
     console.log(pNo);
-    var player = global.players[pNo];
+    let player = global.players[pNo];
     $("#playerViewModal").attr("data-pNo", pNo);
     $("#PlayerTitle").html(player.name);
     $("#PlayerName").html(player.name);
@@ -125,9 +123,9 @@ pickupPrep = function(pNo)
     $('#pickupPlayerModal').attr('data-pNo', pNo);
 
     //Add Teams to dropdown
-    var teams = global.teams;
-    var teamNumber = teams.length;
-    var html = "";
+    let teams = global.teams;
+    let teamNumber = teams.length;
+    let html = "";
 
     for(i = 0; i < teams.length; i++)
     {
@@ -141,7 +139,7 @@ pEditPrep = function(pNo)
     $("#playerViewModal").modal('hide');
     $('#editPlayerModal').modal('show');
     $('#editPlayerModal').attr('data-pNo', pNo);
-    var player = global.players[pNo];
+    let player = global.players[pNo];
     $("#plNameEd").val(player.name);
 
 };
@@ -150,7 +148,7 @@ pEditPrep = function(pNo)
 
 buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For rebuilding a player from saved data
 {
-    var trueOwner = "Unsigned";
+    let trueOwner = "Unsigned";
     for(i in teamListOld)
     {
             if(JSON.stringify(owner) === JSON.stringify(teamListOld[i]))
@@ -160,36 +158,9 @@ buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For
             }
     }
 
-    var self =
-        {
-            name:name,
-            owner:trueOwner,
-            img:img,
-            points:points
-        };
-
-    self.pickup = function(newOwner)
-    {
-        // if(self.owner != "Unsigned")
-        //     self.owner.removePlayer(self);
-        // newOwner.addPlayer(self);
-        self.owner = newOwner;
-        $('#pickupPlayerModal').modal('hide');
-        save();
-    };
-
-    self.score = function(value)
-    {
-        self.points = Number(self.points) + Number(value);
-        if(self.owner != "Unsigned")
-            self.owner.points = Number(self.owner.points) + Number(value);
-        save()
-    };
-
-    self.drop = function()
-    {
-        self.owner = "Unsigned";
-    };
+    let self = Player(name, img);
+    self. owner = trueOwner;
+    self.points = points;
 
     return self;
 };

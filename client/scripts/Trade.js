@@ -1,6 +1,6 @@
 tradeObj = function()
 {
-    var self ={
+    let self ={
         id: null,
         team1: null,
         team2: null,
@@ -14,18 +14,18 @@ tradeObj = function()
 
 
     self.display = function(){
-        var plist1 = $("#tradeList1");
-        var plist2 = $("#tradeList2");
-        var olist1 = $("#tradeOffer1");
-        var olist2 = $("#tradeOffer2");
-        var ppoint1 = $("#pointPocket1");
-        var ppoint2 = $("#pointPocket2");
-        var opoint1 = $("#pointOffer1");
-        var opoint2 = $("#pointOffer2");
+        let plist1 = $("#tradeList1");
+        let plist2 = $("#tradeList2");
+        let olist1 = $("#tradeOffer1");
+        let olist2 = $("#tradeOffer2");
+        let ppoint1 = $("#pointPocket1");
+        let ppoint2 = $("#pointPocket2");
+        let opoint1 = $("#pointOffer1");
+        let opoint2 = $("#pointOffer2");
 
         global.activeTrade = self;
 
-        var counter = 0;
+        let counter = 0;
         $("#teamSelect1").html("<option selected id = \"teamSelect1-Generic\">Select the First Team...</option>\n");
         $("#teamSelect2").html("<option selected id = \"teamSelect1-Generic\">Select the Second Team...</option>\n");
         for(i in global.teams)
@@ -137,9 +137,9 @@ tradeObj = function()
 };
 
 newTradeFromPlayer = function(pNo){
-    var trade = tradeObj();
-    var player = global.players[pNo];
-    var team = player.owner;
+    let trade = tradeObj();
+    let player = global.players[pNo];
+    let team = player.owner;
 
     trade.team1 = team;
     trade.players1.push(player);
