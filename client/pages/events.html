@@ -23,9 +23,17 @@
     
     
     
-    <div id = 'EventsTableView'>
-        <button class = 'btn btn-success col-sm-2 offset-sm-5' data-toggle='modal' data-target='#eventEnactRuleModal' onclick = 'EventEnactPrep()'>Add New Event Item&nbsp&nbsp<i class = "fas fa-plus"></i></button>
-        <br><br><br>
+    <div id = 'EventsTableView' style='margin-top: -20px'>
+        <div class = 'row bg-light eventTitleBar' id = 'eventTitleBar'>
+            <div class = 'p-0 col col-sm-1 border'><button class='col noCorner p-0 titleTable btn btn-light' onclick='ReturnHome()'><i class="fas fa-arrow-left"></i></button></div>
+            <div class='col col-sm-10 border'><table class = 'titleTable text-center align-middle'><tbody><tr><td><h1 class='m-0 align-middle' id='eventTableName'>EVENT NAME GOES HERE</h1></td></tr></tbody></table></div>
+            <div class = 'p-0 col col-sm-1 border dropdown'><button class='col titleTable btn btn-light dropdown-toggle noCorner' id='eventDropdownButton' type = 'button' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class = "fas fa-plus"></i></button>
+                <div class = "p-0 dropdown-menu dropdown-menu-right" aria-labelledby='eventDropdownButton'>
+                    <button class = 'dropdown-item bg-success text-light' type = "button" data-toggle='modal' data-target='#eventEnactRuleModal' onclick = 'EventEnactPrep()'>Enact Rule In Event&nbsp&nbsp<i class = "fas fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
         <table class = "table table-bordered" id = "EventTable">
             <thead  id = "EventHeaders">
                 <tr>

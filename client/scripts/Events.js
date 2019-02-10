@@ -34,7 +34,7 @@ eventRule = function(rule, players)
   self = {
       rule: rule,
       players: players
-  }
+  };
   return self;
 };
 
@@ -123,6 +123,7 @@ let selectedEvent;
 setupEventTable = function(event)
 {
     selectedEvent = global.events[event-1];
+    $("#eventTableName").html(selectedEvent.title);
     $("#EventsHome").toggle(false);
     $("#EventsTableView").toggle(true);
     let headers = "<tr><th scope='col'></th>";
@@ -149,6 +150,12 @@ setupEventTable = function(event)
         });
         $("#EventBody").html(body);
     })
+};
+
+ReturnHome = function()
+{
+  $("#EventsTableView").toggle(false);
+  $("#EventsHome").toggle(true);
 };
 
 EventEnactPrep = function()
@@ -183,6 +190,11 @@ let EventEnactSelected = [];
   EventEnactOnSelected = function()
   {
       let playerlist = [];
+      if(EventSelectedRule === undefined)
+      {
+          alert("Select a rule to enact.");
+          return;
+      }
       EventEnactSelected.forEach(function (player) {
           EventSelectedRule.enact(player);
           playerlist.push(player);
