@@ -100,3 +100,14 @@
     height: 69.5vh;
 
 }
+
+.eventTitleBar
+{
+    margin-bottom: 10px;
+}
+
+.titleTable
+{
+    width: 100%;
+    height: 100%;
+}
