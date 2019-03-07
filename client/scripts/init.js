@@ -1,4 +1,7 @@
-let path = ""
+let path = "";
+
+let socket = io();
+database = new Database(socket);
 
 let global =
     {
@@ -8,12 +11,12 @@ let global =
         teams:[],
         rules:[],
         trades:[],
-        events:[],
-        activeTrade: null,
-        activePlayer: null,
-        activeRule: null,
-        activeTeam: null,
-        activeEvent: null
+        events:[]//,
+        //activeTrade: null,
+        //activePlayer: null,
+        //activeRule: null,
+        //activeTeam: null,
+        //activeEvent: null
     };
 
 save = function()
@@ -69,6 +72,21 @@ load = function()
         populateRuleList();
         populateTeamList();
 
+
+};
+
+cloudSave = function(league){
+        database.league.save(league, function(err, l){
+                if(err){
+                        console.error(err);
+                        return;
+                }
+                localStorage.setItem("Survior", l);
+    });
+};
+
+let cloudLoad = function(name){
+        let l = database.league.getLeague()
 
 };
 

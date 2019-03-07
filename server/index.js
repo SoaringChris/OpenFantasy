@@ -1,7 +1,9 @@
+require("dotenv").config();
 let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let bodyParser = require("body-parser");
+require("./shared/database");
 
 
 let app = express();
@@ -16,5 +18,6 @@ app.get('*', function(req, res){
 });
 
 let server = require("./server")(app);
+require("./components/root.roots")(server);
 
 module.exports = app;

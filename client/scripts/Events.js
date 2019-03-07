@@ -5,9 +5,9 @@ Event = function(title, date)
             title: title,
             date: date,
             rules: [],
-            trades: [],
-            drops: [],
-            pickups: []
+            //trades: [],
+            //drops: [],
+            //pickups: []
         };
 
     self.addRule = function (rule) {
