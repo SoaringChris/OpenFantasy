@@ -21,7 +21,7 @@ Player = function(name, img)
     self.score = function(value)
     {
         self.points = Number(self.points) + Number(value);
-        if(self.owner != "Unsigned")
+        if(self.owner !== "Unsigned")
             self.owner.points = Number(self.owner.points) + Number(value);
         save()
     };
@@ -38,12 +38,12 @@ Player = function(name, img)
 populatePlayerList = function()
 {
     let scroll = $("#PlayerScroll");
-    let players = global.players;
+    let players = global.activeLeague.players;
     let playerNum = players.length;
     let playerRows = Math.ceil(playerNum/3);
     let html ="";
 
-    for(i = 0; i < playerRows; i++)
+    for(let i = 0; i < playerRows; i++)
     {
         html += "<div class = \"row\">\n";
         html+="<button class =\"btn btn-info col-sm-2 offset-sm-2\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
@@ -52,8 +52,8 @@ populatePlayerList = function()
             "</button>";
         playerNum--;
 
-        for(j = 0; j < 2; j++)
-            if(playerNum != 0)
+        for(let j = 0; j < 2; j++)
+            if(playerNum !== 0)
             {
                 html+="<button class =\"btn btn-info col-sm-2 offset-sm-1\" data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
                     " onclick=\"getPlayer(this.getAttribute('data-playNo'))\">\n" +
@@ -70,7 +70,7 @@ populatePlayerList = function()
 
 newPlayer = function(name)
 {
-    global.players.push(Player(name, null));
+    global.activeLeague.players.push(Player(name, null));
     $("#newPlayerModal").modal('hide');
     $("#plName").val("");
     save();
@@ -80,11 +80,11 @@ newPlayer = function(name)
 getPlayer = function(pNo)
 {
     console.log(pNo);
-    let player = global.players[pNo];
+    let player = global.activeLeague.players[pNo];
     $("#playerViewModal").attr("data-pNo", pNo);
     $("#PlayerTitle").html(player.name);
     $("#PlayerName").html(player.name);
-    if(player.owner != "Unsigned") {
+    if(player.owner !== "Unsigned") {
         $("#PlayerOwner").html(player.owner.name);
         $("#tradebutton").show();
         $("#dropbutton").show();
@@ -102,15 +102,15 @@ getPlayer = function(pNo)
 
 editPlayerSave = function(pNo)
 {
-    global.players[pNo].name = $("#plNameEd").val();
+    global.activeLeague.players[pNo].name = $("#plNameEd").val();
     $('#editPlayerModal').modal('hide');
     save();
     populatePlayerList();
-}
+};
 
 removePlayer = function(pNo)
 {
-    global.players.splice(pNo,1);
+    global.activeLeague.players.splice(pNo,1);
     $("#playerViewModal").modal('hide');
     save();
     populatePlayerList();
@@ -123,11 +123,11 @@ pickupPrep = function(pNo)
     $('#pickupPlayerModal').attr('data-pNo', pNo);
 
     //Add Teams to dropdown
-    let teams = global.teams;
+    let teams = global.activeLeague.teams;
     let teamNumber = teams.length;
     let html = "";
 
-    for(i = 0; i < teams.length; i++)
+    for(let i = 0; i < teams.length; i++)
     {
         html += "<option value = '" + i +"'>" + teams[i].name + "</option>\n";
     }
@@ -139,7 +139,7 @@ pEditPrep = function(pNo)
     $("#playerViewModal").modal('hide');
     $('#editPlayerModal').modal('show');
     $('#editPlayerModal').attr('data-pNo', pNo);
-    let player = global.players[pNo];
+    let player = global.activeLeague.players[pNo];
     $("#plNameEd").val(player.name);
 
 };
@@ -149,7 +149,7 @@ pEditPrep = function(pNo)
 buildPlayer = function(name, owner, img, points, teamListOld, teamListNew) //For rebuilding a player from saved data
 {
     let trueOwner = "Unsigned";
-    for(i in teamListOld)
+    for(let i in teamListOld)
     {
             if(JSON.stringify(owner) === JSON.stringify(teamListOld[i]))
             {

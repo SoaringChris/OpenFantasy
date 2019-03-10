@@ -41,7 +41,7 @@
                 <button id = "pickupbutton" type = "button" class = "btn btn-success btn-md" onclick="pickupPrep($('#playerViewModal').attr('data-pNo'))">Pick-Up</button>
                 <button id = "tradebutton" type = "button" class = "btn btn-primary btn-md" onclick = "initPlayerTrade($('#playerViewModal').attr('data-pNo'))">Trade</button>
                 <button type = "button" class = "btn btn-info btn-md" onclick = "pEditPrep($('#playerViewModal').attr('data-pNo'))">Edit</button>
-                <button id = "dropbutton" type = "button" class = "btn btn-warning btn-md"onclick="global.players[$('#playerViewModal').attr('data-pNo')].drop()" data-dismiss="modal">Drop</button>
+                <button id = "dropbutton" type = "button" class = "btn btn-warning btn-md" onclick="global.activeLeague.players[$('#playerViewModal').attr('data-pNo')].drop()" data-dismiss="modal">Drop</button>
                 <button type = "button" class = "btn btn-danger btn-md" onclick="removePlayer($('#playerViewModal').attr('data-pNo'))">Delete</button>
             </div>
         </div>
@@ -57,7 +57,7 @@
             </div>
             <div class = "modal-body">
                 <div class = "form-group">
-                    <lable for = "plName">Player Name</lable>
+                    <label for = "plName">Player Name</label>
                     <input type = "text" class = "form-control" id = "plName">
                 </div>
 
@@ -79,14 +79,14 @@
             </div>
             <div class = 'modal-body' id = 'enact-body'>
                 <div class = form-group>
-                    <lable for = targetTm>Select the team you wish to assign this player to:</lable>
+                    <label for = targetTm>Select the team you wish to assign this player to:</label>
                     <select class = 'form-control' id = 'targetTm'>
 
                     </select>
                 </div>
             </div>
             <div class = 'modal-footer'>
-                <button type = "button" class = "btn btn-success btn-md" onclick="global.players[$('#pickupPlayerModal').attr('data-pNo')].pickup(global.teams[$('#targetTm').val()])">Save</button>
+                <button type = "button" class = "btn btn-success btn-md" onclick="global.activeLeague.players[$('#pickupPlayerModal').attr('data-pNo')].pickup(global.activeLeague.teams[$('#targetTm').val()])">Save</button>
                 <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -102,7 +102,7 @@
             </div>
             <div class = "modal-body">
                 <div class = "form-group">
-                    <lable for = "plNameEd">Player Name</lable>
+                    <label for = "plNameEd">Player Name</label>
                     <input type = "text" class = "form-control" id = "plNameEd">
                 </div>
 
@@ -124,7 +124,7 @@
 <script>
     function initPlayerTrade(pNo)
     {
-        if(global.players[pNo].owner != "Unsigned") {
+        if(global.activeLeague.players[pNo].owner !== "Unsigned") {
             let url = path + "modals/trade.html";
             $("#playerViewModal").modal('hide');
             $("#tradeModalContainer").load(url, function () {
