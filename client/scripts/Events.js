@@ -24,7 +24,7 @@ Event = function(title, date)
 
     self.addPickup = function(pickup){
         self.pickups.push(pickup);
-    }
+    };
 
         return self;
 };
@@ -41,12 +41,12 @@ eventRule = function(rule, players)
 populateEventList = function()
 {
     let scroll = $("#eventScroll");
-    let events = global.events;
+    let events = global.activeLeague.events;
     let eventNum = events.length;
     let eventRows = Math.ceil(eventNum/3);
     let html ="";
 
-    for(i = 0; i < eventRows; i++)
+    for(let i = 0; i < eventRows; i++)
     {
         html += "<div class = 'row'>\n";
         html+="<button class ='btn btn-info col-sm-2 offset-sm-2' data-toggle='modal' data-target='#eventViewModal'" +
@@ -55,8 +55,8 @@ populateEventList = function()
             "</button>";
         eventNum--;
 
-        for(j = 0; j < 2; j++)
-            if(eventNum != 0)
+        for(let j = 0; j < 2; j++)
+            if(eventNum !== 0)
             {
                 html+="<button class ='btn btn-info col-sm-2 offset-sm-1' data-toggle='modal' data-target='#eventViewModal'" +
                     " onclick='setupEventTable("+ eventNum +")'>\n" +
@@ -72,7 +72,7 @@ populateEventList = function()
 
 newEvent = function(name, date)
 {
-    global.events.push(Event(name, date));
+    global.activeLeague.events.push(Event(name, date));
     $("#newEventName").val("");
     $("#newEventDate").val("");
     save();
@@ -87,7 +87,7 @@ buildEvent = function(title, date, rules, trades, drops, pickups, playerlistold,
         let newRule;
         for(let oldRule of rulelistold)
         {
-            if(JSON.stringify(rule.rule) == JSON.stringify(oldRule))
+            if(JSON.stringify(rule.rule) === JSON.stringify(oldRule))
             {
                 let index = rulelistold.indexOf(oldRule);
                 newRule = (rulelistnew[index]);
@@ -122,20 +122,20 @@ let selectedEvent;
 
 setupEventTable = function(event)
 {
-    selectedEvent = global.events[event-1];
+    selectedEvent = global.activeLeague.events[event-1];
     $("#eventTableName").html(selectedEvent.title);
     $("#EventsHome").toggle(false);
     $("#EventsTableView").toggle(true);
     let headers = "<tr><th scope='col'></th>";
-    global.rules.forEach(function(rule)
+    global.activeLeague.rules.forEach(function(rule)
     {
      headers +="<th scope='col'>" + rule.name + "</th>";
     });
     $("#EventHeaders").html(headers);
     let body;
-    global.players.forEach(function(player){
+    global.activeLeague.players.forEach(function(player){
         body += "<tr><th scope='row'>" + player.name + "</th>";
-        global.rules.forEach(function (rule) {
+        global.activeLeague.rules.forEach(function (rule) {
             body += "<td>";
             let value = 0;
             selectedEvent.rules.forEach(function(eventRule)
@@ -145,7 +145,7 @@ setupEventTable = function(event)
                     value += parseInt(rule.value);
                 }
             });
-            body += value
+            body += value;
             body += "</td>"
         });
         $("#EventBody").html(body);
@@ -162,16 +162,16 @@ EventEnactPrep = function()
 {
     EventEnactSelected = [];
     $("#EventEnactRules").html("<option selected>Select a Rule</option>");
-  global.rules.forEach(function(rule, i){
+  global.activeLeague.rules.forEach(function(rule, i){
      $("#EventEnactRules").append("<option data-rNo = '"+ i +"'>" + rule.name + "</option>")
   });
   let html = "";
-  global.players.forEach(function(player,i){
-      html += "<div class = 'btn-group-toggle '  onclick='EventEnactSelect(global.players[" + i + "])' data-toggle ='buttons'>";
+  global.activeLeague.players.forEach(function(player,i){
+      html += "<div class = 'btn-group-toggle '  onclick='EventEnactSelect(global.activeLeague.players[" + i + "])' data-toggle ='buttons'>";
       html += "<label class = 'btn btn-outline-success list-group-item list-group-item-action noCorner'>";
-      html += "<input type = 'checkbox' checked autocomplete='off' value = '" + i +"'/>" + global.players[i].name + "</label>";
+      html += "<input type = 'checkbox' checked autocomplete='off' value = '" + i +"'/>" + global.activeLeague.players[i].name + "</label>";
       html += "</div>"
-  })
+  });
     $("#EventEnactTargetPl").html(html);
 
 };
@@ -200,7 +200,7 @@ let EventEnactSelected = [];
           playerlist.push(player);
       });
       selectedEvent.rules.push(eventRule(EventSelectedRule, playerlist));
-      setupEventTable(global.events.indexOf(selectedEvent)+1);
+      setupEventTable(global.activeLeague.events.indexOf(selectedEvent)+1);
 
   };
 
@@ -209,5 +209,5 @@ let EventEnactSelected = [];
   EventEnactRuleChange = function(event)
   {
       let i = $("#EventEnactRules option:selected").attr("data-rNo");
-      EventSelectedRule = global.rules[i];
+      EventSelectedRule = global.activeLeague.rules[i];
   };

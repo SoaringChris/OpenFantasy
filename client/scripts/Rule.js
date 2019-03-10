@@ -27,11 +27,11 @@ RuleLog = function(rule, players)
 
 populateRuleList = function()
 {
-    let rules = global.rules;
+    let rules = global.activeLeague.rules;
     let ruleNumber = rules.length;
     let html = "";
 
-    for(i = 0; i < rules.length; i++)
+    for(let i = 0; i < rules.length; i++)
     {
         html += "<button type = button class = \"list-group-item list-group-item-action\" data-toggle=\"modal\" data-target=\"#ruleViewModal\" data-rNo = '"+i+"' + onClick='getRule(this.getAttribute(\"data-rNo\"))'>" +
             rules[i].name +"</button>\n"
@@ -44,7 +44,7 @@ newRule = function()
     let name = $("#rlName").val();
     let disc = $("#rlDisc").val();
     let value = $("#rlVal").val();
-    global.rules.push(Rule(name, disc, value));
+    global.activeLeague.rules.push(Rule(name, disc, value));
     $("#newRuleModal").modal('hide');
     save();
     populateRuleList();
@@ -55,7 +55,7 @@ newRule = function()
 
 getRule = function(rNo)
 {
-    let rule = global.rules[rNo];
+    let rule = global.activeLeague.rules[rNo];
     $("#ruleViewModal").attr("data-rNo",rNo);
     $("#RuleTitle").html(rule.name);
     $("#RuleDisc").html(rule.description);
@@ -68,7 +68,7 @@ rEditPrep = function(rNo)
     $("#ruleViewModal").modal('hide');
     $('#editRuleModal').modal('show');
     $('#editRuleModal').attr('data-rNo', rNo);
-    let rule = global.rules[rNo];
+    let rule = global.activeLeague.rules[rNo];
     $("#rlNameEd").val(rule.name);
     $("#rlValEd").val(rule.value);
     $("#rlDiscEd").val(rule.description);
@@ -77,7 +77,7 @@ rEditPrep = function(rNo)
 
 editRuleSave = function(rNo)
 {
-    global.rules[rNo]=  Rule($("#rlNameEd").val(), $("#rlDiscEd").val(), $("#rlValEd").val());
+    global.activeLeague.rules[rNo]=  Rule($("#rlNameEd").val(), $("#rlDiscEd").val(), $("#rlValEd").val());
     $('#editRuleModal').modal('hide');
     save();
     populateRuleList();
@@ -93,11 +93,11 @@ enactPrep = function(rNo)
     enactSelected = [];
 
     //Add players to dropdown
-    let players = global.players;
+    let players = global.activeLeague.players;
     let playerNumber = players.length;
     let html = "";
 
-    for(i = 0; i < players.length; i++)
+    for(let i = 0; i < players.length; i++)
     {
         html += "<div class = 'btn-group-toggle '  onclick='enactSelect(" + i + ")' data-toggle ='buttons'>";
         html += "<label class = 'btn btn-outline-success list-group-item list-group-item-action noCorner'>";
@@ -123,13 +123,13 @@ enactOnSelected = function(rNo)
 {
   enactSelected.forEach(function(pNo)
   {
-   global.rules[rNo].enact(global.players[pNo])
+   global.activeLeague.rules[rNo].enact(global.activeLeague.players[pNo])
   });
 };
 
 removeRule = function(rNo)
 {
- global.rules.splice(rNo,1);
+ global.activeLeague.rules.splice(rNo,1);
  $("#ruleViewModal").modal('hide');
  save();
  populateRuleList();

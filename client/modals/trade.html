@@ -1,4 +1,4 @@
-<script src = "scripts/Trade.js"/>
+<script src = "../scripts/Trade.js"></script>
 <div id = "TradeModal" class = "modal fade">
     <div class = "modal-dialog modal-lg" style="max-width:95%; width: 95%; max-height: 95%; height: 95%">
         <div class = "modal-content" style = "height:  100%;">
@@ -8,10 +8,10 @@
             </div>
             <div class = "modal-body pb-0 pt-0">
                 <div class = "row">
-                    <select id="teamSelect1" class = "form-control col" onchange="dropdownTeamChange(event, 1)">
+                    <select id="teamSelect1" for = "teamSelect1-Generic" class = "form-control col" onchange="dropdownTeamChange(event, 1)">
                         <option selected id = "teamSelect1-Generic">Select the First Team...</option>
                     </select>
-                    <select id = "teamSelect2" class = "form-control col" onchange = "dropdownTeamChange(event, 2)">
+                    <select id = "teamSelect2" for = "teamSelect2-Generic" class = "form-control col" onchange = "dropdownTeamChange(event, 2)">
                         <option selected id = "teamSelect2-Generic">Select the Second Team...</option>
                     </select>
                 </div>
@@ -75,7 +75,7 @@
     //populate team selectors
     // for(i = 1; i < 3; i++)
     // {
-    //     for(team in global.teams) {
+    //     for(team in global.activeLeague.teams) {
     //         $("#teamSelect" + i).append("<option>" + team.name + "</option>")
     //     }
     // }
@@ -116,13 +116,13 @@
     function offerPlayer(event, team){
         let trade = global.activeTrade;
         let pNo = event.currentTarget.getAttribute('data-playNo');
-        if(team == 1)
+        if(team === 1)
         {
-            trade.players1.push(global.players[pNo]);
+            trade.players1.push(global.activeLeague.players[pNo]);
         }
-        if(team == 2)
+        if(team === 2)
         {
-            trade.players2.push(global.players[pNo])
+            trade.players2.push(global.activeLeague.players[pNo])
         }
 
         trade.display();
@@ -132,13 +132,13 @@
     {
         let pNo = event.currentTarget.getAttribute('data-playNo');
         let trade = global.activeTrade;
-        if(team == 1)
+        if(team === 1)
         {
-            trade.players1.splice(trade.players1.indexOf(global.players[pNo]), 1);
+            trade.players1.splice(trade.players1.indexOf(global.activeLeague.players[pNo]), 1);
         }
-        if(team == 2)
+        if(team === 2)
         {
-            trade.players2.splice(trade.players2.indexOf(global.players[pNo]), 2);
+            trade.players2.splice(trade.players2.indexOf(global.activeLeague.players[pNo]), 2);
         }
         trade.display();
     }
@@ -146,15 +146,15 @@
     function dropdownTeamChange(event, team)
     {
         let trade = global.activeTrade;
-        if(team == 1)
+        if(team === 1)
         {
-            trade.team1 = global.teams[$("#teamSelect1 option:selected").attr("data-teamNo")];
+            trade.team1 = global.activeLeague.teams[$("#teamSelect1 option:selected").attr("data-teamNo")];
             trade.players1 = [];
         }
 
-        if(team == 2)
+        if(team === 2)
         {
-            trade.team2 = global.teams[$("#teamSelect2 option:selected").attr("data-teamNo")];
+            trade.team2 = global.activeLeague.teams[$("#teamSelect2 option:selected").attr("data-teamNo")];
             trade.players2 = [];
         }
 
