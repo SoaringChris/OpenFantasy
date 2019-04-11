@@ -60,7 +60,7 @@ newTeam = function()
 {
     let tName = $("#tmName").val();
     let oName = $("#owName").val();
-    let points = $("#tmpoints").val();
+    let points = $("#tmScore").val();
     if(points === undefined || points == null || points === "")
         points = 0;
     global.activeLeague.teams.push(Team(tName, oName, points));

@@ -6,7 +6,8 @@ League = function(name, description)
             description:description,
             teams:[],
             players:[],
-            events: []
+            events: [],
+            leagueTeams: []
         };
 
     self.addTeam = function(name)

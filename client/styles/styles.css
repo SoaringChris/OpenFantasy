@@ -111,3 +111,21 @@
     width: 100%;
     height: 100%;
 }
+
+.picker {
+    display: inline-block;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(3, 1, 1, 0.08);
+}
+
+.colorInput{
+    width: 10%;
+    height: 3vw;
+}
+
+.outlinedText{
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
