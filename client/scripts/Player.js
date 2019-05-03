@@ -51,15 +51,15 @@ populatePlayerList = function()
     {
         html += "<div class = \"row\">\n";
         let color = '#218838';
-        let textColor = 'white';
         let border = 'transparent';
         if(players[playerNum-1].team !== 'N/A'){
             color = players[playerNum-1].team.color;
             if(lightOrDark(color) === 'light'){
-                textColor = 'black';
                 border = 'black';
             }
         }
+        let textColor = getAccentColor(color);
+
         html+="<button class =\"btn btn-info col-sm-2 offset-sm-2\" style = 'border-color: "+ border +"; background-color: "+ color +"; color: "+ textColor +";' data-toggle=\"modal\" data-target=\"#playerViewModal\" data-playNo = \""+(playerNum-1)+"\"" +
             " onclick=\"getPlayer(this.getAttribute('data-playNo'))\">\n" +
             players[playerNum-1].name +
@@ -76,7 +76,7 @@ populatePlayerList = function()
                     color = players[playerNum-1].team.color;
                     if(lightOrDark(color) === 'light'){
                         textColor = 'black';
-                        border - 'black';
+                        border = 'black';
                     }
                 }
 
@@ -128,6 +128,7 @@ getPlayer = function(pNo)
 editPlayerSave = function(pNo)
 {
     global.activeLeague.players[pNo].name = $("#plNameEd").val();
+    global.activeLeague.players[pNo].team = global.activeLeague.leagueTeams[$("#plLTeamEd").val()];
     $('#editPlayerModal').modal('hide');
     save();
     populatePlayerList();
@@ -162,12 +163,12 @@ pickupPrep = function(pNo)
 newPlayerPrep = function()
 {
     $("#plName").val("");
-    let html = "<option class='outlinedText' value = '-1'>Select a team from the list<option>";
+    let html = "<option class='outlinedText' value = '-1'>Select a team from the list</option>";
     global.activeLeague.leagueTeams.forEach(function(team, i){
-        html += "<option class='outlinedText' value = '" + i + "' style = 'color: "+ team.color + "'>" + team.name + "<\option>\n";
+        html += "<option class='outlinedText' value = '" + i + "' style = 'color: "+ team.color + ";' background-color: '" + getAccentColor(team.color) + ";'>" + team.name + "</option>\n";
     });
     $("#plLTeam").html(html)
-}
+};
 
 pEditPrep = function(pNo)
 {
@@ -176,6 +177,12 @@ pEditPrep = function(pNo)
     $('#editPlayerModal').attr('data-pNo', pNo);
     let player = global.activeLeague.players[pNo];
     $("#plNameEd").val(player.name);
+    let html = "<option class='outlinedText' value = '-1'>Select a team from the list</option>\n";
+    global.activeLeague.leagueTeams.forEach(function(team, i){
+        html += "<option class='outlinedText'  value = '" + i + "' style = 'color: "+ team.color + "; background-color: "+ getAccentColor(team.color) +";'>" + team.name + "</option>\n";
+    });
+    $("#plLTeamEd").html(html);
+    $("#plLTeamEd").val(global.activeLeague.leagueTeams.indexOf(player.team));
 
 };
 
@@ -218,4 +225,60 @@ LeagueTeam = function(name, color)
 saveLTeam = function (name, color) {
     global.activeLeague.leagueTeams.push(LeagueTeam(name, color));
     save();
+};
+
+orderPlayers = function(type){
+    if(type === 'LTeam'){
+        return function(a, b){
+            if(a.team === 'N/A')
+            {
+                if(b.team === 'N/A'){
+                    return 0;
+                }
+                else{
+                    return -1;
+                }
+            }
+            if(b.team === 'N/A'){
+                return 1;
+            }
+            let A = a.team.name.toUpperCase();
+            let B = b.team.name.toUpperCase();
+            if(A < B){
+                return -1;
+            }
+            if(A > B){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+    }
+    if(type === 'Owner'){
+        return function(a, b){
+            if(a.owner === 'Unsigned'){
+                if(b.owner === 'Unsigned'){
+                    return 0;
+                }
+                else{
+                    return -1;
+                }
+            }
+            if(b.owner === 'Unsigned'){
+                return 1;
+            }
+            let A = a.owner.name.toUpperCase();
+            let B = b.owner.name.toUpperCase();
+            if(A < B){
+                return -1
+            }
+            if(A > B){
+                return 1
+            }
+            else{
+                return 0
+            }
+        }
+    }
 };

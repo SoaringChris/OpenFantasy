@@ -38,6 +38,8 @@ eventRule = function(rule, players)
   return self;
 };
 
+let sortType = 'LTeam';
+
 populateEventList = function()
 {
     let scroll = $("#eventScroll");
@@ -133,8 +135,13 @@ setupEventTable = function(event)
     });
     $("#EventHeaders").html(headers);
     let body;
-    global.activeLeague.players.forEach(function(player){
-        body += "<tr><th scope='row'>" + player.name + "</th>";
+    let orderedPlayers = global.activeLeague.players.sort(orderPlayers(sortType));
+    orderedPlayers.forEach(function(player){
+        let color = '#218838';
+        if(player.team !== 'N/A'){
+            color = player.team.color
+        }
+        body += "<tr style= 'color:"+ getAccentColor(color) +"; background-color: "+ color +"'><th scope='row'>" + player.name + "</th>";
         global.activeLeague.rules.forEach(function (rule) {
             body += "<td>";
             let value = 0;

@@ -31,6 +31,8 @@
                 <i class = "fas fa-plus"></i></button>
                 <div class = "p-0 dropdown-menu dropdown-menu-right" aria-labelledby='eventDropdownButton'>
                     <button class = 'dropdown-item bg-success text-light' type = "button" data-toggle='modal' data-target='#eventEnactRuleModal' onclick = 'EventEnactPrep()'>Enact Rule In Event&nbsp&nbsp<i class = "fas fa-plus"></i></button>
+                    <button class = 'dropdown-item bg-light' type = "button" onclick = '{sortType = "LTeam"; setupEventTable(global.activeLeague.events.indexOf(selectedEvent)+1);}'>Sort by Team Name&nbsp&nbsp<i class = "fas fa-sort-alpha-down"></i></button>
+                    <button class = 'dropdown-item bg-light' type = "button" onclick = '{sortType = "Owner"; setupEventTable(global.activeLeague.events.indexOf(selectedEvent)+1);}'>Sort by Owner&nbsp&nbsp<i class = "fas fa-sort-alpha-down"></i></button>
                 </div>
             </div>
         </div>

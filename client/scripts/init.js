@@ -87,6 +87,16 @@ loadColorPicker = function(){
 AColorPicker.from('.picker')
     .on('change', (picker, color) => {
         $('#teamColorButton').css('background-color', color);
+        //$('#editTeamColorButton').css('background-color', color);
     });
 };
 
+getAccentColor = function(color){
+  if(lightOrDark(color) === 'light')
+  {
+      return 'black'
+  }
+  else{
+      return 'white'
+  }
+};

@@ -33,15 +33,15 @@ newLeague = function()
     let league = League($("#leagueNameField").val(), $("#leagueDescriptionField").val());
     league.save();
     global = league;
-    $("#newLeagueModal").modal('hide').on('hidden.bs.modal', window.location.replace("#!dashboard"));
-    $('.modal-backdrop').remove();
+    $("#newLeagueModal").modal('hide');
+    window.location.replace("#!dashboard");
 };
 
 loadLeague = function(name)
 {
     load(name);
-    $("#loadLeagueModal").modal('hide').on('hidden.bs.modal', window.location.replace("#!dashboard"));
-    $('.modal-backdrop').remove();
+    $("#loadLeagueModal").modal('hide');
+    window.location.replace("#!dashboard");
 };
 
 populateLeagueList = function()
