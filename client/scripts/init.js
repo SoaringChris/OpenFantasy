@@ -1,3 +1,6 @@
+let socket = io();
+database = new Database(socket);
+
 let global =
     {
         //leagues:[],
@@ -6,12 +9,12 @@ let global =
         //teams:[],
         //rules:[],
         //trades:[],
-        //events:[],
+        //events:[]//,
         activeTrade: null,
         activePlayer: null,
         activeRule: null,
         activeTeam: null,
-        activeEvent: null,
+        activeEvent: null
     };
 
 save = function()
@@ -89,6 +92,21 @@ AColorPicker.from('.picker')
         $('#teamColorButton').css('background-color', color);
         //$('#editTeamColorButton').css('background-color', color);
     });
+};
+
+cloudSave = function(league){
+        database.league.save(league, function(err, l){
+                if(err){
+                        console.error(err);
+                        return;
+                }
+                localStorage.setItem("Survior", l);
+    });
+};
+
+let cloudLoad = function(name){
+        let l = database.league.getLeague()
+
 };
 
 getAccentColor = function(color){
