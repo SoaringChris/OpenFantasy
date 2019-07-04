@@ -5,20 +5,13 @@
     <title>Title</title>
 </head>
     <div class = "row">
-        <button class = "btn btn-success col-sm-2 offset-sm-5" data-toggle="modal" data-target = "#newPlayerModal" onclick="populatePlayerList()">Add New Player&nbsp&nbsp<i class = "fas fa-plus"></i> </button>
+        <button class = "btn btn-success col-sm-2 offset-sm-3" data-toggle="modal" data-target = "#newPlayerModal" onclick="newPlayerPrep()">Add New Player&nbsp&nbsp<i class = "fas fa-plus"></i> </button>
+        <button onload='loadColorPicker()' class = 'btn btn-success col-sm-2 offset-sm-2' data-toggle = 'modal' data-target='#newLeagueTeamModal'>Add New League Team&nbsp&nbsp<i class = "fas fa-plus"></i></button>
     </div>
     <br><br><br>
     <div class = "PlayerScroll" id = "PlayerScroll">
         <div class = "row">
-            <button class = "btn btn-info col-sm-2 offset-sm-2" data-toggle="modal" data-target= "#playerViewModal">
-                Player 1
-            </button>
-            <button class = "btn btn-info col-sm-2 offset-sm-1" data-toggle="modal" data-target= "#playerViewModal">
-                Player 2
-            </button>
-            <button class = "btn btn-info col-sm-2 offset-sm-1" data-toggle="modal" data-target= "#playerViewModal">
-                Player 3
-            </button>
+        
         </div>
 
     </div>
@@ -59,11 +52,15 @@
                 <div class = "form-group">
                     <label for = "plName">Player Name</label>
                     <input type = "text" class = "form-control" id = "plName">
+                    <label for = plLTeam>Competition Team</label>
+                    <select class = 'form-control outlinedText' id = 'plLTeam' onchange='styleSelect(event)'>
+    
+                    </select>
                 </div>
 
             </div>
             <div class = "modal-footer">
-                <button type = "button" class = "btn btn-success btn-md" onclick="newPlayer($('#plName').val())">Save</button>
+                <button type = "button" class = "btn btn-success btn-md" onclick="newPlayer($('#plName').val(), global.activeLeague.leagueTeams[$('#plLTeam').val()])">Save</button>
                 <button type = "button" class = "btn btn-danger btn-md" data-dismiss="modal" >Cancel</button>
             </div>
         </div>
@@ -104,6 +101,10 @@
                 <div class = "form-group">
                     <label for = "plNameEd">Player Name</label>
                     <input type = "text" class = "form-control" id = "plNameEd">
+                    <label for = plLTeamEd>Competition Team</label>
+                    <select class = 'form-control outlinedText' id = 'plLTeamEd' onchange='styleSelect(event)'>
+    
+                    </select>
                 </div>
 
             </div>
@@ -115,6 +116,37 @@
     </div>
 </div>
 <div id = "tradeModalContainer">
+    
+    <div id = "newLeagueTeamModal" class='modal fade' role = 'dialog'>
+        <div class = 'modal-dialog'>
+            <div class='modal-content'>
+                
+                <div class='modal-header'>
+                    <h2>New League Team</h2>
+                    <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                </div>
+                
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <label for = 'leagueTeamNameEd'>Name</label>
+                        <input type ='text' class='form-control' id='leagueTeamNameEd'>
+                    </div>
+                    <label>Color</label>
+                    <div class='colorInput' id ='teamColorButton' style='background-color: #ff0000;' onclick='$("#teamColorPicker").toggle()'></div>
+                    <div class="picker" id = 'teamColorPicker'
+                         acp-color="#FFF0000"
+                         acp-show-rgb="no"
+                         acp-show-hsl="no"
+                         acp-show-hex="yes" style='display: none'>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-success' data-dismiss='modal' onclick='saveLTeam($("#leagueTeamNameEd").val(), $("#teamColorButton").css("background-color"))'>Save</button>
+                    <button tyoe='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -135,6 +167,12 @@
         else{
             pickupPrep(pNo);
         }
-    }
+    };
+    
+    styleSelect = function(event){
+        $("#plLTeam").css('color', global.activeLeague.leagueTeams[event.target.value].color)
+    };
+    
+    loadColorPicker();
 </script>
 </html>

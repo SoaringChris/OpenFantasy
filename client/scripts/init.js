@@ -33,10 +33,12 @@ load = function(key)
         let strdTeams = storedLeague.teams;
         let strdRules = storedLeague.rules;
         let strdEvents = storedLeague.events;
+        let strdLTeams = storedLeague.leagueTeams;
         let parsePlayers = [];
         let parseTeams = [];
         let parseRules = [];
         let parseEvents = [];
+        let parseLTeams = [];
 
 
         //Rebuild teamlist
@@ -45,11 +47,17 @@ load = function(key)
                 let curTeam = strdTeams[i];
                 parseTeams.push(buildTeam(curTeam.name, curTeam.oName, curTeam.players, curTeam.points))
         }
+
+        for(let i in strdLTeams){
+                let curLTeam = strdLTeams[i];
+                parseLTeams.push(LeagueTeam(curLTeam.name, curLTeam.color));
+        }
+
         //Rebuild playerlist
         for(let i in strdPlayers)
         {
                 let curPlayer = strdPlayers[i];
-                parsePlayers.push(buildPlayer(curPlayer.name, curPlayer.owner, curPlayer.img, curPlayer.points, strdTeams, parseTeams));
+                parsePlayers.push(buildPlayer(curPlayer.name, curPlayer.owner, curPlayer.img, curPlayer.points, curPlayer.team, strdTeams, parseTeams, strdLTeams, parseLTeams));
          }
 
         for(let i in strdRules)
@@ -69,6 +77,7 @@ load = function(key)
         global.activeLeague.teams = parseTeams;
         global.activeLeague.rules = parseRules;
         global.activeLeague.events = parseEvents;
+        global.activeLeague.leagueTeams = parseLTeams;
 
         populatePlayerList();
         populateEventList();
@@ -76,6 +85,13 @@ load = function(key)
         populateTeamList();
 
 
+};
+loadColorPicker = function(){
+AColorPicker.from('.picker')
+    .on('change', (picker, color) => {
+        $('#teamColorButton').css('background-color', color);
+        //$('#editTeamColorButton').css('background-color', color);
+    });
 };
 
 cloudSave = function(league){
@@ -93,3 +109,12 @@ let cloudLoad = function(name){
 
 };
 
+getAccentColor = function(color){
+  if(lightOrDark(color) === 'light')
+  {
+      return 'black'
+  }
+  else{
+      return 'white'
+  }
+};
